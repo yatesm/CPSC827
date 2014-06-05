@@ -1,0 +1,67 @@
+Name: Yates Monteith and Anthony McDougal
+Email JYMONTE@Clemson.edu, MCOUDGL@Clemson.edu
+Timestamp Thu Mar 10 18:02:18 2011
+
+Input Line: /*  This program should contain errors */        
+Input Line: PROGRAM error      
+Input Line:   DECLARE
+Input Line:       INTEGER x;     
+Input Line:       REAL a 75 ;     
+Input Line:       INTEGER c 100 :: 25 ;     
+Input Line:       REAL f 50 :: 60 ;      
+Input Line:       REAL a 50 :: 60 ;      
+Entry a already exists in global symbol table!
+Input Line:       REAL hcg 50 :: 60 ;      
+Input Line:       INTEGER lkj 100 ;     
+Input Line:       REAL help;     
+Input Line:       REAL x;     
+Entry x already exists in global symbol table!
+Input Line:   END     
+Input Line: 
+Input Line:   PROCEDURE bye{VALUE REAL a, REFERENCE REAL k 125 }         
+Input Line:       a <- k[100] + ( lkj[d] * tre[1:2] ) ;  
+Input Line:       d <- - d - tre[b:d] * ( x / k[d] ) ;   
+Input Line:       INPUT "%d5 - %d5\n", a, d, tre[b:b];    
+Input Line:   END    
+Input Line: 
+Input Line:   PROCEDURE byethere{VALUE REAL a, REFERENCE REAL k 125 ,
+Input Line:                      VALUE REAL tre 235 :: 543 }
+Input Line:       a <- k[100] + ( lkj[d] * tre[1:2] ) ;
+Input Line:       d <- - d - tre[b:d] * ( x / k[d] ) ;
+Input Line:       INPUT "%d5 - %d5\n", a, d, tre[b:b];
+Input Line:   END 
+Input Line: 
+Input Line:   PROCEDURE hithere{VALUE INTEGER d, REFERENCE REAL tre 125 ,
+Input Line:                     VALUE INTEGER k 235 :: 543 }
+Input Line:     DECLARE
+Input Line:         INTEGER a;          
+Input Line:         INTEGER hcg 75 ;       
+Input Line:         INTEGER def 75 ;            
+Input Line:     END
+Input Line: 
+Input Line:       IF (a <= 10) THEN
+Input Line:         b <- c + ( d * e ) / f ;
+Input Line:       ELSE
+Input Line:         c <- - b - d * ( e / f ) ;
+Input Line:       END; 
+Input Line:       OUTPUT "%d5 - %d5\n", a, b, f[a:b];
+Input Line:   END 
+Input Line: 
+Input Line:   MAIN
+Input Line:     INPUT "%d5 - %d5\n", lkj[25], a, b;     
+Input Line:     WHILE (i <= 20) DO
+Input Line:       IF (b==c) THEN     
+Input Line:         lkj[a:b] <- lkj[a:b] * a / b;     
+Input Line:         a <- lkj[a:b] + a / b;     
+Input Line:         CALL hithere{VALUE a, REFERENCE b};     
+Input Line:       END;     
+Input Line:     END;
+Input Line:   END  
+Input Line:   
+Input Line: END     
+Input Line: 
+Input Line: 
+Input Line: 
+Input Line: 
+Succesful parse
+Go have a beer!

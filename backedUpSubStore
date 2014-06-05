@@ -1,0 +1,117 @@
+		typeString = determineType((*tupleList)[i]->getOperand(4));
+		if ( typeString == "constant" || typeString == "-" ) {
+				typeString = determineType((*tupleList)[i]->getOperand(3));
+				if ( typeString == "constant" ) {
+					registerLocation = simulation.findValueInRegister((*tupleList)[i]->getOperand(1));
+					offset = 0;
+					if ( (*tupleList)[i]->getOperand(4) != "-" ) {
+						offset = atoi((*tupleList)[i]->getOperand(4).c_str()) * 4;
+					} 
+					if ( registerLocation != -1 ) {
+						simulation.setValueInRegister((*tupleList)[i]->getOperand(3), registerLocation)'
+						fprintf(filePtr, "mov DWORD PTR[%s + %d], %s;\n", registerNames[registerLocation].c_str(), offset, (*tupleList)[i]->getOperand(3).c_str());
+					} 
+					else {
+						fprintf(filePtr, "mov DWORD PTR[%s + %d], %s;\n", (*tupleList)[i]->getOperand(1).c_str(), offset, (*tupleList)[i]->getOperand(3).c_str());
+					}
+				} 
+				else if ( typeString == "variable" ) {
+					registerLocation = simulation.findValueInRegister((*tupleList)[i]->getOperand(1));
+					registerLocation2 = simulation.findValueInRegister((*tupleList)[i]->getOperand(3));
+
+					offset = 0;
+					if ( (*tupleList)[i]->getOperand(4) != "-" )
+						offset = atoi((*tupleList)[i]->getOperand(4).c_str()) * 4;
+
+					if ( registerLocation != -1 && registerLocation2 == -1 ) 
+						fprintf(filePtr, "mov DWORD PTR[%s + %d], PTR[%s];\n", registerNames[registerLocation].c_str(), offset, (*tupleList)[i]->getOperand(3).c_str());
+					else if ( registerLocation == -1 && registerLocation2 != -1 )
+						fprintf(filePtr, "mov DWORD PTR[%s + %d], PTR[%s];\n", (*tupleList)[i]->getOperand(1).c_str(), offset, registerNames[registerLocation2].c_str());
+					else if ( registerLocation != -1 && registerLocation2 != -1 )
+						fprintf(filePtr, "mov DWORD PTR[%s + %d], PTR[%s];\n", registerNames[registerLocation].c_str(), offset, registerNames[registerLocation2].c_str());
+					else {
+						registerLocation = simulation.findFreeRegister(-1);
+						fprintf(filePtr, "mov %s, %s;\n", registerNames[registerLocation].c_str(), (*tupleList)[i]->getOperand(1).c_str());
+						fprintf(filePtr, "mov DWORD PTR[%s + %d], PTR[%s];\n", registerNames[registerLocation].c_str(), offset, (*tupleList)[i]->getOperand(3).c_str()); 
+					}
+				} 
+				else if ( typeString == "IV" ) {
+					registerLocation = simulation.findValueInRegister((*tupleList)[i]->getOperand(1));
+					registerLocation2 = simulation.findValueInRegister((*tupleList)[i]->getOperand(3));
+
+					offset = 0;
+					if ( (*tupleList)[i]->getOperand(4) != "-" ) 
+						offset = atoi((*tupleList)[i]->getOperand(4).c_str()) * 4;
+
+					if ( registerLocation != -1 && registerLocation2 == -1 ) {
+						registerLocation2 = simulation.findFreeRegister(registerLocation);
+						fprintf(filePtr, "mov %s, %s;\n", registerNames[registerLocation2].c_str(), (*tupleList)[i]->getOperand(3).c_str());
+						fprintf(filePtr, "mov DWORD PTR[%s + %d], PTR[%s];\n", registerNames[registerLocation].c_str(), offset, registerNames[registerLocation2].c_str());
+					} 
+					else if ( registerLocation == -1 && registerLocation2 != -1 )
+						fprintf(filePtr, "mov DWORD PTR[%s + %d], PTR[%s];\n", (*tupleList)[i]->getOperand(1).c_str(), offset, registerNames[registerLocation2].c_str());
+					else if ( registerLocation != -1 && registerLocation2 != -1 )
+						fprintf(filePtr, "mov DWORD PTR[%s + %d], PTR[%s];\n", registerNames[registerLocation].c_str(), offset, registerNames[registerLocation2].c_str());
+					else {
+						registerLocation = simulation.findFreeRegister(-1);
+						fprintf(filePtr, "mov %s, %s;\n", registerNames[registerLocation].c_str(), (*tupleList)[i]->getOperand(3).c_str());
+						fprintf(filePtr, "mov DWORD PTR[%s + %d], PTR[%s];\n", (*tupleList)[i]->getOperand(3).c_str(), offset, registerNames[registerLocation].c_str()); 
+					}
+				}
+			} 
+			else {
+				registerLocation = simulation.findValueInRegister((*tupleList)[i]->getOperand(4));
+				if ( registerLocation == -1 ) {
+					registerLocation = simulation.findFreeRegister(-1);
+					fprintf(filePtr, "mov %s, %s;\n", registerNames[registerLocation].c_str(), (*tupleList)[i]->getOperand(4).c_str());
+				}
+				intermediateRegister = registerLocation;
+
+				fprintf(filePtr, "mult %s, 4;\n", registerNames[intermediateRegister].c_str());
+
+				typeString = determineType((*tupleList)[i]->getOperand(3));
+				if ( typeString == "constant" ) {
+					registerLocation = simulation.findValueInRegister((*tupleList)[i]->getOperand(1));
+
+					if ( registerLocation != -1 )
+						fprintf(filePtr, "mov DWORD PTR[%s + %s], %s;\n", registerNames[registerLocation].c_str(), registerNames[intermediateRegister].c_str(), (*tupleList)[i]->getOperand(3).c_str());
+					else 
+						fprintf(filePtr, "mov DWORD PTR[%s + %s], %s;\n", (*tupleList)[i]->getOperand(1).c_str(), registerNames[intermediateRegister].c_str(), (*tupleList)[i]->getOperand(3).c_str());
+				}
+				else if ( typeString == "variable" ) {
+						registerLocation = simulation.findValueInRegister((*tupleList)[i]->getOperand(1));
+						registerLocation2 = simulation.findValueInRegister((*tupleList)[i]->getOperand(3));
+
+					if ( registerLocation != -1 && registerLocation2 == -1 )
+						fprintf(filePtr, "mov DWORD PTR[%s + %s], PTR[%s];\n", registerNames[registerLocation].c_str(), registerNames[intermediateRegister].c_str(), (*tupleList)[i]->getOperand(3).c_str());
+					else if ( registerLocation == -1 && registerLocation2 != -1 )
+						fprintf(filePtr, "mov DWORD PTR[%s + %s], PTR[%s];\n", (*tupleList)[i]->getOperand(1).c_str(), registerNames[intermediateRegister].c_str(), registerNames[registerLocation2].c_str());
+					else if ( registerLocation != -1 && registerLocation2 != -1 ) {
+						fprintf(filePtr, "mov DWORD PTR[%s + %s], PTR[%s];\n", registerNames[registerLocation].c_str(), registerNames[intermediateRegister].c_str(), registerNames[registerLocation2].c_str());
+					} 
+					else {
+						registerLocation = simulation.findFreeRegister(-1);
+						fprintf(filePtr, "mov %s, %s;\n", registerNames[registerLocation].c_str(), (*tupleList)[i]->getOperand(1).c_str());
+						fprintf(filePtr, "mov DWORD PTR[%s + %s], PTR[%s];\n", registerNames[registerLocation].c_str(), registerNames[intermediateRegister].c_str(), (*tupleList)[i]->getOperand(3).c_str()); 
+					}
+				} else if ( typeString == "IV" ) {
+					registerLocation = simulation.findValueInRegister((*tupleList)[i]->getOperand(1));
+					registerLocation2 = simulation.findValueInRegister((*tupleList)[i]->getOperand(3));
+
+					if ( registerLocation != -1 && registerLocation2 == -1 ) {
+						registerLocation2 = simulation.findFreeRegister(registerLocation);
+						fprintf(filePtr, "mov %s, %s;\n", registerNames[registerLocation2].c_str(), (*tupleList)[i]->getOperand(3).c_str());
+						fprintf(filePtr, "mov DWORD PTR[%s + %s], PTR[%s];\n", registerNames[registerLocation].c_str(), registerNames[intermediateRegister].c_str(), registerNames[registerLocation2].c_str());
+					} 
+					else if ( registerLocation == -1 && registerLocation2 != -1 )
+						fprintf(filePtr, "mov DWORD PTR[%s + %s], PTR[%s];\n", (*tupleList)[i]->getOperand(1).c_str(), registerNames[intermediateRegister].c_str(), registerNames[registerLocation2].c_str());
+					else if ( registerLocation != -1 && registerLocation2 != -1 )
+						fprintf(filePtr, "mov DWORD PTR[%s + %s], PTR[%s];\n", registerNames[registerLocation].c_str(), registerNames[intermediateRegister].c_str(), registerNames[registerLocation2].c_str());
+					else {
+						registerLocation = simulation.findFreeRegister(-1);
+						fprintf(filePtr, "mov %s, %s;\n", registerNames[registerLocation].c_str(), (*tupleList)[i]->getOperand(3).c_str());
+						fprintf(filePtr, "mov DWORD PTR[%s + %s], PTR[%s];\n", (*tupleList)[i]->getOperand(3).c_str(), registerNames[intermediateRegister].c_str(), registerNames[registerLocation].c_str()); 
+					}
+				}
+			}
+		}

@@ -1,0 +1,50 @@
+##+0##
+##+1+2+33+13+14+16  print the symbolic 4-tuples##
+/*  This program should not contains any errors */
+PROGRAM semantics1
+  DECLARE
+      INTEGER x ;
+      INTEGER y, z;
+      REAL help;
+      REAL a 75;
+      INTEGER c 100::25;
+      INTEGER d 100::25, e;
+      ##+15 print the variable symbol table after update##
+      REAL f 50;
+      ##-15 ##
+  END
+
+  PROCEDURE hithere{VALUE INTEGER d, REFERENCE REAL tre 125,
+                    VALUE INTEGER k 235::543}
+    DECLARE
+      INTEGER a;
+      INTEGER b, c, e ;
+      INTEGER f;
+      INTEGER hcg 75;
+      INTEGER def 75;
+    END
+
+    IF (a <= +10) THEN
+      b <- c + ( d * e ) / f ;
+    ELSE
+      c <- - b - d * ( e / f ) ;
+    END;
+    OUTPUT a, b, f;
+  END
+
+  PROCEDURE byethere{VALUE INTEGER a, REFERENCE REAL k 125,
+                     VALUE REAL tre 235::543}
+    a <- k[100] + ( f[x] * tre[1:2] ) ;
+    x <- - x - tre[x:y] * ( x / k[z] ) ;
+    INPUT a, z, tre[a:a];
+  END
+
+  MAIN
+    OUTPUT a[25], x, y;
+    WHILE ( x > y*3 ) DO
+       WHILE ( y > 1 ) DO
+          c[x:y] <- c[x:y]*y/x;
+       END;
+    END;
+    END
+  END

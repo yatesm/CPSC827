@@ -1,0 +1,19 @@
+/* This program demonstrates procedures and pass by value */
+##+13##
+PROGRAM valtest
+    DECLARE
+        INTEGER x;
+    END
+
+    PROCEDURE valproc{VALUE INTEGER x}
+        x <- x + 1;
+        OUTPUT " %d ", x;
+    END
+    
+    MAIN
+    x <- 5;
+    OUTPUT " %d ", x;
+    CALL valproc{VALUE x};
+    OUTPUT " %d ", x;
+    END
+END

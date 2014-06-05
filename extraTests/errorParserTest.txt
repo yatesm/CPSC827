@@ -1,0 +1,23 @@
+##+1+7 print the symbolic reductions##       
+/*  This program should contain 2 errors */        
+PROGRAM error      
+  DECLARE     
+      INTEGER x;     
+      REAL a 75 ;     
+      INTEGER c 100 :: 25 ;     
+      REAL f 60 :: a ;
+      INTEGER lkj 100 ;     
+      REAL help;     
+  END     
+     
+  MAIN     
+    INPUT "3%d", lkj[25], a, b;     
+    WHILE (i <= 20) DO
+      IF (b==c) THEN     
+        lkj[a:b] <- lkj[a:b]*a/b;     
+        a <- lkj[a:b]a/b;     
+        CALL hithere{VALUE a, REFERENCE b};     
+      END;     
+    END;      
+  END     
+END     

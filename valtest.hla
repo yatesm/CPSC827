@@ -1,0 +1,80 @@
+
+//(valtest, PROGRAMBEGIN, , )
+program valtest;
+#include ( "stdlib.hhf" )
+
+//(x, MEMORY, 1, -)
+static
+x: dword;
+
+//(valproc, PROCEDUREBEGIN, -, -)
+
+//(-, BEGINFORMALPARAMETERS, -, -)
+
+//(x, FORMALVALUEPARAMETER, 1, -)
+
+//(-, ENDFORMALPARAMETERS, -, -)
+procedure valproc( val x: int32) ;
+
+//(I$0, IADD, x, 1)
+begin valproc;
+mov( x, EAX );
+add( 1, EAX );
+
+//(x, SUBSTORE, I$0, -)
+mov( EAX, x );
+
+//(-, CALL, PRINTF, -)
+
+//(-, BEGINOUTPUTPARAMETER,  " %d ", -)
+stdout.put("  ");
+
+//(-, OUTPUTPARAMETER, x, 1)
+stdout.puti32Size(x, 1, ' ');
+
+//(-, ENDOUTPUTPARAMETER, -, -)
+
+//(valproc, ENDPROCEDURE, -, -)
+end valproc;
+
+//(MAIN, LABEL, -, -)
+begin valtest;
+MAIN:
+
+//(x, SUBSTORE, 5, -)
+mov( 5, x );
+
+//(-, CALL, PRINTF, -)
+
+//(-, BEGINOUTPUTPARAMETER,  " %d ", -)
+stdout.put("  ");
+
+//(-, OUTPUTPARAMETER, x, 1)
+stdout.puti32Size(x, 1, ' ');
+
+//(-, ENDOUTPUTPARAMETER, -, -)
+
+//(valproc, PROCCALL, -, -)
+
+//(-, BEGINACTUALPARAMETERLIST, -, -)
+
+//(-, ACTUALVALUEPARAMETER, x, 1)
+
+//(-, ENDACTUALPARAMETERS, -, -)
+valproc(x) ;
+
+//(-, CALL, PRINTF, -)
+
+//(-, BEGINOUTPUTPARAMETER,  " %d ", -)
+stdout.put("  ");
+
+//(-, OUTPUTPARAMETER, x, 1)
+stdout.puti32Size(x, 1, ' ');
+
+//(-, ENDOUTPUTPARAMETER, -, -)
+
+//(-, ENDOFCALCULATIONS, -, -)
+
+//(valtest, PROGRAMEND, -, -)
+stdout.put(nl);
+end valtest;

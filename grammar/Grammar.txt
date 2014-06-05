@@ -1,0 +1,140 @@
+$
+$      CPSC 827 Simple Precedence Grammar for Spring 2011
+$
+start prog body END
+prog PROGRAM var
+body declpart procpart execpart
+ declpart execpart
+$
+$     Declarations
+$
+$    Do you want to declare procedures???
+$
+declpart DECLARE decllist END
+decllist decllist-
+decllist- decllist- declstat ;
+ declstat ;
+declstat declstat-
+declstat- declstat- ,  var
+ declstat- ,  var = constant
+ type var
+ type var = constant
+ type var integer 
+ type var integer :: integer 
+type INTEGER
+ REAL
+$
+$     Procedures
+$
+procpart proclist
+proclist proclist proc
+ proc
+proc prochead declpart statlist END
+ prochead statlist END
+prochead procname null-list
+ procname fparmlist }
+procname PROCEDURE var
+null-list { }
+fparmlist fparmlist-
+fparmlist- fparmlist- , calltype type var
+ fparmlist- , calltype type var integer 
+ fparmlist- , calltype type var integer :: integer 
+ { calltype type var
+ { calltype type var integer 
+ { calltype type var integer :: integer 
+calltype VALUE
+ REFERENCE
+$
+$     Executable Part
+$
+execpart exechead statlist END
+exechead MAIN
+statlist statlist-
+statlist- statlist- stat
+ stat
+stat whilestat ;
+ ifstat ;
+ assignstat 
+ inputstat- ;
+ outputstat- ;
+ callstat ;
+$
+inputstat- inputstat
+inputstat inputstat , var
+ inputstat , var [ astat ]
+ inputstat , var [ astat : astat ]
+ INPUT string , var
+ INPUT string , var [ astat ]
+ INPUT string , var [ astat : astat ]
+$
+outputstat- outputstat
+outputstat outputstat , var
+ outputstat , var [ astat ]
+ outputstat , var [ astat : astat ]
+ OUTPUT string , var
+ OUTPUT string , var [ astat ]
+ OUTPUT string , var [ astat : astat ]
+$
+callstat callname null-list
+ callname aparmlist }
+callname CALL var
+aparmlist aparmlist-
+aparmlist- aparmlist- , calltype var
+ aparmlist- , calltype var [ astat ]
+ aparmlist- , calltype var [ astat : astat ]
+ { calltype var
+ { calltype var [ astat ]
+ { calltype var [ astat : astat ]
+$
+ifstat ifhead statlist END
+ ifthen statlist END
+ifthen ifhead statlist ELSE
+ifhead IF ( bexpr ) THEN
+$
+whilestat whilecond statlist END
+whilecond whilehead ( bexpr ) DO
+whilehead WHILE
+$
+assignstat astat ;
+astat var <- aexpr
+ var [ astat ] <- aexpr
+ var [ astat : astat ]  <- aexpr
+ bexpr
+bexpr bexpr-
+bexpr- bexpr- || andexpr
+ andexpr
+andexpr andexpr-
+andexpr- andexpr- && notexpr
+ notexpr
+notexpr notexpr-
+notexpr- ! relexpr
+ relexpr
+relexpr relexpr-
+relexpr- aexpr < aexpr
+ aexpr <= aexpr
+ aexpr > aexpr
+ aexpr >= aexpr
+ aexpr == aexpr
+ aexpr != aexpr
+ aexpr
+aexpr aexpr-
+aexpr- aexpr- + term
+ aexpr- - term
+ - term
+ term
+term term-
+term- term- * primary
+ term- / primary
+ primary
+primary primary-
+primary- ( bexpr )
+ var [ astat : astat ]
+ var [ astat ]
+ var
+ constant
+constant integer
+ real
+$SP
+$SPFILE
+$FLOYD
+$PFFILE

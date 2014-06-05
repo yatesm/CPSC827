@@ -1,0 +1,210 @@
+		if ( typeString == "constant") {
+				//Determine type of RHS operand (3)
+				fprintf(filePtr, "mov( %s, EAX );\n", op4.c_str());
+				fprintf(filePtr, "shl( 2, EAX );\n");
+				simulation.setValueInRegister(op3, 0);
+				typeString = determineType(op3);				
+				if ( typeString == "constant" )
+					fprintf(filePtr, "mov( %s, %s[ EAX ] );\n", op3.c_str(), op1.c_str());
+				else if ( typeString == "variable" ) {
+					registerLocation = simulation.findValueInRegister(op1);
+					registerLocation2 = simulation.findValueInRegister(op3);
+					
+					if ( registerLocation != -1 && registerLocation2 == -1 ) {
+						simulation.setValueInRegister(op3, registerLocation);
+						fprintf(filePtr, "mov( %s, %s[ EAX ] );\n", op3.c_str(), registerNames[registerLocation].c_str());
+					}
+					else if ( registerLocation == -1 && registerLocation2 != -1 )
+						fprintf(filePtr, "mov( %s, %s[ EAX ] );\n", registerNames[registerLocation2].c_str(), op1.c_str());
+					else if ( registerLocation != -1 && registerLocation2 != -1 )
+						fprintf(filePtr, "mov( %s, %s[ EAX ] );\n", registerNames[registerLocation2].c_str(), registerNames[registerLocation].c_str());
+					else {
+						//Neither variable in a register
+						//Find register location
+						registerLocation = simulation.findFreeRegister(0);
+						//Evict previous contents
+						simulation.evictRegister(registerLocation);
+						//Set value in register simulation
+						simulation.setValueInRegister(op1, registerLocation);
+						fprintf(filePtr, "mov( %s[ EAX ], %s );\n",  op1.c_str(), registerNames[registerLocation].c_str());
+						fprintf(filePtr, "mov( %s, %s );\n", op3.c_str(), registerNames[registerLocation].c_str()); 
+					}
+				}
+				else if ( typeString == "IV" ) {
+					registerLocation = simulation.findValueInRegister(op1);
+					registerLocation2 = simulation.findValueInRegister(op3);
+					
+					if ( registerLocation != -1 && registerLocation2 == -1 ) {
+						//Intermediate Variable not in register, find free register
+						registerLocation2 = simulation.findFreeRegister(registerLocation, 0);
+						//Evict current contents of register
+						simulation.evictRegister(registerLocation2);
+						//Set value in register
+						simulation.setValueInRegister(op3, registerLocation2);
+						fprintf(filePtr, "mov( %s, %s );\n", op3.c_str(), registerNames[registerLocation2].c_str());
+						fprintf(filePtr, "mov( %s, %s[ EAX ] );\n", registerNames[registerLocation2].c_str(), registerNames[registerLocation].c_str());
+					} 
+					else if ( registerLocation == -1 && registerLocation2 != -1 )
+						fprintf(filePtr, "mov( %s, %s[ EAX ] );\n", registerNames[registerLocation2].c_str(), op1.c_str());
+					else if ( registerLocation != -1 && registerLocation2 != -1 )
+						fprintf(filePtr, "mov( %s, %s[ EAX ] );\n", registerNames[registerLocation2].c_str(), registerNames[registerLocation].c_str());
+					else {
+						//Intermediate Variable not in register, find free register
+						registerLocation2 = simulation.findFreeRegister(0);
+						//Evict current contents of register
+						simulation.evictRegister(registerLocation2);
+						//Set value in register
+						simulation.setValueInRegister(op3, registerLocation2);					
+						fprintf(filePtr, "mov( %s, %s );\n", op3.c_str(), registerNames[registerLocation2].c_str());
+						fprintf(filePtr, "mov( %s, %s[ EAX ] );\n", registerNames[registerLocation2].c_str(), op3.c_str()); 
+					}
+					//Set OP3 IV to Used
+					simulation.setUsedInRegister(true, registerLocation2);
+				}
+			} 
+			else if(op4 == "-") {		//Scalar op1
+				typeString = determineType(op3);
+				if(typeString == "constant") {					
+					fprintf(filePtr, "mov( %s, %s );\n", op3.c_str(), op1.c_str());
+				}
+				else if(typeString == "variable") {
+					registerLocation = simulation.findValueInRegister(op1);
+					registerLocation2 = simulation.findValueInRegister(op3);
+					
+					if ( registerLocation != -1 && registerLocation2 == -1 ) {
+						simulation.setValueInRegister(op3, registerLocation);
+						fprintf(filePtr, "mov( %s, %s );\n", op3.c_str(), registerNames[registerLocation].c_str());
+					}
+					else if ( registerLocation == -1 && registerLocation2 != -1 )
+						fprintf(filePtr, "mov( %s, %s );\n", registerNames[registerLocation2].c_str(), op1.c_str());
+					else if ( registerLocation != -1 && registerLocation2 != -1 )
+						fprintf(filePtr, "mov( %s, %s );\n", registerNames[registerLocation2].c_str(), registerNames[registerLocation].c_str());
+					else {
+						//Neither variable in a register
+						//Find register location
+						registerLocation = simulation.findFreeRegister(-1);
+						//Evict previous contents
+						simulation.evictRegister(registerLocation);
+						//Set value in register simulation
+						simulation.setValueInRegister(op1, registerLocation);
+						fprintf(filePtr, "mov( %s, %s );\n",  op1.c_str(), registerNames[registerLocation].c_str());
+						fprintf(filePtr, "mov( %s, %s );\n", op3.c_str(), registerNames[registerLocation].c_str()); 					
+					}
+				}
+				else if(typeString == "IV") {
+									
+					registerLocation = simulation.findValueInRegister(op1);
+					registerLocation2 = simulation.findValueInRegister(op3);
+					if ( registerLocation != -1 && registerLocation2 == -1 ) {
+						//Intermediate Variable not in register, find free register
+						registerLocation2 = simulation.findFreeRegister(registerLocation);
+						//Evict current contents of register
+						simulation.evictRegister(registerLocation2);
+						//Set value in register
+						simulation.setValueInRegister(op3, registerLocation2);
+						fprintf(filePtr, "mov( %s, %s );\n", op3.c_str(), registerNames[registerLocation2].c_str());
+						fprintf(filePtr, "mov( %s, %s );\n", registerNames[registerLocation2].c_str(), registerNames[registerLocation].c_str());
+					} 
+					else if ( registerLocation == -1 && registerLocation2 != -1 )
+						fprintf(filePtr, "mov( %s, %s );\n", registerNames[registerLocation2].c_str(), op1.c_str());
+					else if ( registerLocation != -1 && registerLocation2 != -1 )
+						fprintf(filePtr, "mov( %s, %s );\n", registerNames[registerLocation2].c_str(), registerNames[registerLocation].c_str());
+					else {
+						//Intermediate Variable not in register, find free register
+						registerLocation2 = simulation.findFreeRegister(-1);
+						//Evict current contents of register
+						simulation.evictRegister(registerLocation2);
+						//Set value in register
+						simulation.setValueInRegister(op3, registerLocation2);					
+						fprintf(filePtr, "mov( %s, %s );\n", op3.c_str(), registerNames[registerLocation2].c_str());
+						fprintf(filePtr, "mov( %s, %s );\n", registerNames[registerLocation2].c_str(), op3.c_str()); 
+					}
+					//Set OP3 IV to Used
+					simulation.setUsedInRegister(true, registerLocation2);					
+				}
+			}
+			else if(typeString == "variable") {  //OP4 is Variable
+				registerLocation = simulation.findValueInRegister(op4);
+				if(registerLocation == -1) {
+					registerLocation = simulation.findFreeRegister(-1);
+					simulation.evictRegister(registerLocation);
+					simulation.setValueInRegister(op4, registerLocation);
+					fprintf(filePtr, "mov( %s, %s );\n", op4.c_str(), registerNames[registerLocation].c_str());
+				}
+				fprintf(filePtr, "shl( 2, %s );\n", registerNames[registerLocation].c_str());
+				typeString = determineType(op3);
+				if(typeString == "constant")
+					fprintf(filePtr, "mov( %s, %s[ %s ] );\n", op3.c_str(), op1.c_str(), registerNames[registerLocation].c_str());
+				else if(typeString == "variable") {
+					registerLocation2 = simulation.findFreeRegister(registerLocation);
+					simulation.evictRegister(registerLocation2);
+					simulation.setValueInRegister(op3, registerLocation2);
+					fprintf(filePtr, "mov( %s, %s );\n", op3.c_str(), registerNames[registerLocation2].c_str());
+					fprintf(filePtr, "mov( %s, %s[ %s ]);\n", registerNames[registerLocation2].c_str(), op1.c_str(), registerNames[registerLocation].c_str());
+				}
+				else if(typeString == "IV") {
+					registerLocation = simulation.findValueInRegister(op3);
+					if(registerLocation == -1) {
+						registerLocation2 = simulation.findFreeRegister(registerLocation);
+						simulation.evictRegister(registerLocation);
+						simulation.setValueInRegister(op3, registerLocation);
+						fprintf(filePtr, "mov( %s, %s );\n", op3.c_str(), registerNames[registerLocation2].c_str());
+					}
+					simulation.setUsedInRegister(true, registerLocation);
+					fprintf(filePtr, "mov( %s, %s[ %s ]);\n", registerNames[registerLocation2].c_str(), op1.c_str(), registerNames[registerLocation].c_str());
+					
+				
+				}
+			}
+			else {	
+				//OP4 is IV
+			
+				registerLocation = simulation.findValueInRegister(op4);
+/*								
+				if ( registerLocation == -1 ) {
+					//OP4 IV is not in register, find register
+					registerLocation = simulation.findFreeRegister(0);
+					simulation.setValueInRegister(op4, registerLocation);
+					fprintf(filePtr, "mov( %s, EAX );\n", op4.c_str());
+				}
+				else if(registerLocation != 0) {
+					fprintf(filePtr, "mov( %s, EAX );\n", op4.c_str());
+					simulation.evictRegister(registerLocation);
+				}
+*/
+//				simulation.setValueInRegister(op4, 0);
+				fprintf(filePtr, "shl( 2, %s );\n", registerNames[registerLocation].c_str());								
+			
+				typeString = determineType(op3);
+				if ( typeString == "constant" )
+						fprintf(filePtr, "mov( %s, %s[ %s ] );\n", op3.c_str(), op1.c_str(), registerNames[registerLocation].c_str());
+				else if ( typeString == "variable" ) {
+						registerLocation2 = simulation.findValueInRegister(op3);
+
+					if ( registerLocation2 == -1 ) {
+						registerLocation2 = simulation.findFreeRegister(0);
+						simulation.evictRegister(registerLocation2);
+						simulation.setValueInRegister(op3, registerLocation2);
+						fprintf(filePtr, "mov( %s, %s[ %s ] );\n", registerNames[registerLocation2].c_str(), op1.c_str(), registerNames[registerLocation].c_str());
+					}	
+					else //if ( registerLocation2 != -1 )
+						fprintf(filePtr, "mov( %s, %s[ %s ] );\n", registerNames[registerLocation2].c_str(), op1.c_str(), registerNames[registerLocation].c_str());
+					simulation.setUsedInRegister(true, 0);
+				} 
+				else if ( typeString == "IV" ) {
+					registerLocation2 = simulation.findValueInRegister(op3);
+
+					if ( registerLocation2 == -1 ) {
+						registerLocation2 = simulation.findFreeRegister(registerLocation, 0);
+						simulation.evictRegister(registerLocation2);
+						simulation.setValueInRegister(op3, registerLocation2);
+						fprintf(filePtr, "mov( %s, %s[ %s ]);\n", registerNames[registerLocation2].c_str(), op1.c_str(), registerNames[registerLocation].c_str());
+					} 
+					else //if ( registerLocation2 != -1 )
+						fprintf(filePtr, "mov( %s, %s[ %s ] );\n", registerNames[registerLocation2].c_str(), op1.c_str(), registerNames[registerLocation].c_str());
+					simulation.setUsedInRegister(true, simulation.findValueInRegister(op3));
+				}
+				simulation.setUsedInRegister(true, simulation.findValueInRegister(op4));	
+			}
+
+		}

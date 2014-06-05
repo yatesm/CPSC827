@@ -1,0 +1,5 @@
+yatesdisgrace@yatesdisgrace-laptop:~/Desktop/HLA Go!$ hla bubblesort.hla
+yatesdisgrace@yatesdisgrace-laptop:~/Desktop/HLA Go!$ ./bubblesort
+ Before the sort: 10 , 27 , -1 , 1 , 7 , 34 , 14 , 24 , 17 , 4 
+After the sort: -1 , 1 , 4 , 7 , 10 , 14 , 17 , 24 , 27 , 34
+

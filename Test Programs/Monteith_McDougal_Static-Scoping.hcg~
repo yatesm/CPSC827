@@ -1,0 +1,27 @@
+/* This program demonstrates static scoping! */
+##+13##
+PROGRAM scoping
+    DECLARE
+        INTEGER x, y;
+    END
+    
+    PROCEDURE localvars{}
+        DECLARE
+            INTEGER x, y;
+        END        
+        x <- 12;
+        y <- 10;
+        OUTPUT "%d \n", x;
+        OUTPUT "%d \n", y;
+    END
+    
+    MAIN    
+        x <- 4;
+        y <- 5;
+        OUTPUT "%d \n", x;
+        OUTPUT "%d \n", y;
+        CALL localvars{};
+        OUTPUT "%d \n", x;
+        OUTPUT "%d \n", y;
+    END
+END

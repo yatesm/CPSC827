@@ -1,0 +1,37 @@
+Name: Yates Monteith and Anthony McDougal
+Email JYMONTE@Clemson.edu, MCOUDGL@Clemson.edu
+Timestamp Thu Apr 28 23:12:30 2011
+
+				(recursion, PROGRAMBEGIN, , )
+				(x, MEMORY, 1, -)
+				(recproc, PROCEDUREBEGIN, -, -)
+				(-, BEGINFORMALPARAMETERS, -, -)
+				(x, FORMALVALUEPARAMETER, 1, -)
+				(-, ENDFORMALPARAMETERS, -, -)
+				(-, CALL, PRINTF, -)
+				(-, BEGINOUTPUTPARAMETER,  " %d ", -)
+				(-, OUTPUTPARAMETER, x, 1)
+				(-, ENDOUTPUTPARAMETER, -, -)
+				(B$0, ILESS, x, 10)
+				(L$0, CJUMPF, B$0, -)
+				(I$0, IADD, x, 1)
+				(x, SUBSTORE, I$0, -)
+				(recproc, PROCCALL, -, -)
+				(-, BEGINACTUALPARAMETERLIST, -, -)
+				(-, ACTUALVALUEPARAMETER, x, 1)
+				(-, ENDACTUALPARAMETERS, -, -)
+				(L$0, LABEL, -, -)
+				(recproc, ENDPROCEDURE, -, -)
+				(MAIN, LABEL, -, -)
+				(x, SUBSTORE, 0, -)
+				(recproc, PROCCALL, -, -)
+				(-, BEGINACTUALPARAMETERLIST, -, -)
+				(-, ACTUALVALUEPARAMETER, x, 1)
+				(-, ENDACTUALPARAMETERS, -, -)
+				(-, ENDOFCALCULATIONS, -, -)
+				(recursion, PROGRAMEND, -, -)
+Succesful parse
+Go have a beer!
+ProcString = procedure recproc( val x: int32) 
+callString = recproc(x) 
+callString = recproc(x) 

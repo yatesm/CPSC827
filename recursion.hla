@@ -1,0 +1,78 @@
+
+//(recursion, PROGRAMBEGIN, , )
+program recursion;
+#include ( "stdlib.hhf" )
+
+//(x, MEMORY, 1, -)
+static
+x: dword;
+
+//(recproc, PROCEDUREBEGIN, -, -)
+
+//(-, BEGINFORMALPARAMETERS, -, -)
+
+//(x, FORMALVALUEPARAMETER, 1, -)
+
+//(-, ENDFORMALPARAMETERS, -, -)
+procedure recproc( val x: int32) ;
+
+//(-, CALL, PRINTF, -)
+begin recproc;
+
+//(-, BEGINOUTPUTPARAMETER,  " %d ", -)
+stdout.put("  ");
+
+//(-, OUTPUTPARAMETER, x, 1)
+stdout.puti32Size(x, 1, ' ');
+
+//(-, ENDOUTPUTPARAMETER, -, -)
+
+//(B$0, ILESS, x, 10)
+cmp( x, 10 );
+
+//(L$0, CJUMPF, B$0, -)
+jge L0;
+
+//(I$0, IADD, x, 1)
+mov( x, EAX );
+add( 1, EAX );
+
+//(x, SUBSTORE, I$0, -)
+mov( EAX, x );
+
+//(recproc, PROCCALL, -, -)
+
+//(-, BEGINACTUALPARAMETERLIST, -, -)
+
+//(-, ACTUALVALUEPARAMETER, x, 1)
+
+//(-, ENDACTUALPARAMETERS, -, -)
+recproc(x) ;
+
+//(L$0, LABEL, -, -)
+L0:
+
+//(recproc, ENDPROCEDURE, -, -)
+end recproc;
+
+//(MAIN, LABEL, -, -)
+begin recursion;
+MAIN:
+
+//(x, SUBSTORE, 0, -)
+mov( 0, x );
+
+//(recproc, PROCCALL, -, -)
+
+//(-, BEGINACTUALPARAMETERLIST, -, -)
+
+//(-, ACTUALVALUEPARAMETER, x, 1)
+
+//(-, ENDACTUALPARAMETERS, -, -)
+recproc(x) ;
+
+//(-, ENDOFCALCULATIONS, -, -)
+
+//(recursion, PROGRAMEND, -, -)
+stdout.put(nl);
+end recursion;

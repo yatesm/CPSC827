@@ -1,0 +1,41 @@
+Name: Yates Monteith and Anthony McDougal
+Email JYMONTE@Clemson.edu, MCOUDGL@Clemson.edu
+Timestamp Thu Apr 28 17:27:20 2011
+
+				(scoping, PROGRAMBEGIN, , )
+				(x, MEMORY, 1, -)
+				(y, MEMORY, 1, -)
+				(localvars, PROCEDUREBEGIN, -, -)
+				(-, NOFORMALPARAMETERS, -, -)
+				(-, ENDFORMALPARAMETERS, -, -)
+				(x, MEMORY, 1, -)
+				(y, MEMORY, 1, -)
+				(x, SUBSTORE, 12, -)
+				(y, SUBSTORE, 10, -)
+				(-, CALL, PRINTF, -)
+				(-, BEGINOUTPUTPARAMETER,  "LOCAL: x=%d y=%d \n", -)
+				(-, OUTPUTPARAMETER, x, 1)
+				(-, OUTPUTPARAMETER, y, 1)
+				(-, ENDOUTPUTPARAMETER, -, -)
+				(localvars, ENDPROCEDURE, -, -)
+				(MAIN, LABEL, -, -)
+				(x, SUBSTORE, 4, -)
+				(y, SUBSTORE, 5, -)
+				(-, CALL, PRINTF, -)
+				(-, BEGINOUTPUTPARAMETER,  "GLOBAL x=%d, y=%d \n", -)
+				(-, OUTPUTPARAMETER, x, 1)
+				(-, OUTPUTPARAMETER, y, 1)
+				(-, ENDOUTPUTPARAMETER, -, -)
+				(localvars, PROCCALL, -, -)
+				(-, NOFORMALPARAMETERS, -, -)
+				(-, NOACTUALPARAMETERS, -, -)
+				(-, CALL, PRINTF, -)
+				(-, BEGINOUTPUTPARAMETER,  "GLOBAL x=%d, y=%d \n", -)
+				(-, OUTPUTPARAMETER, x, 1)
+				(-, OUTPUTPARAMETER, y, 1)
+				(-, ENDOUTPUTPARAMETER, -, -)
+				(-, ENDOFCALCULATIONS, -, -)
+				(scoping, PROGRAMEND, -, -)
+Succesful parse
+Go have a beer!
+Operation NOACTUALPARAMETERS is not defined!

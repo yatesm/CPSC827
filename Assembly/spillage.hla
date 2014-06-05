@@ -1,0 +1,286 @@
+
+//(spillage, PROGRAMBEGIN, , )
+
+//EAX: 
+//EBX: 
+//ECX: 
+//EDX: 
+//ESI: 
+//EDI: 
+
+program spillage;
+#include ( "stdlib.hhf" )
+
+//(x, MEMORY, 1, -)
+
+//EAX: 
+//EBX: 
+//ECX: 
+//EDX: 
+//ESI: 
+//EDI: 
+
+static
+x: dword;
+
+//(MAIN, LABEL, -, -)
+
+//EAX: 
+//EBX: 
+//ECX: 
+//EDX: 
+//ESI: 
+//EDI: 
+
+begin spillage;
+MAIN:
+
+//(I$0, IADD, 1, 2)
+
+//EAX: 
+//EBX: 
+//ECX: 
+//EDX: 
+//ESI: 
+//EDI: 
+
+mov( 1, EAX );
+add( 2, EAX );
+
+//(I$1, IADD, 1, 2)
+
+//EAX: I$0
+//EBX: 
+//ECX: 
+//EDX: 
+//ESI: 
+//EDI: 
+
+mov( 1, EBX );
+add( 2, EBX );
+
+//(I$2, IADD, I$0, I$1)
+
+//EAX: I$0
+//EBX: I$1
+//ECX: 
+//EDX: 
+//ESI: 
+//EDI: 
+
+add( EBX, EAX );
+
+//(I$3, IADD, 3, 4)
+
+//EAX: I$2
+//EBX: I$1
+//ECX: 
+//EDX: 
+//ESI: 
+//EDI: 
+
+mov( 3, ECX );
+add( 4, ECX );
+
+//(I$4, IADD, 5, 6)
+
+//EAX: I$2
+//EBX: I$1
+//ECX: I$3
+//EDX: 
+//ESI: 
+//EDI: 
+
+mov( 5, EDX );
+add( 6, EDX );
+
+//(I$5, IADD, 7, 8)
+
+//EAX: I$2
+//EBX: I$1
+//ECX: I$3
+//EDX: I$4
+//ESI: 
+//EDI: 
+
+mov( 7, ESI );
+add( 8, ESI );
+
+//(I$6, IADD, 9, 10)
+
+//EAX: I$2
+//EBX: I$1
+//ECX: I$3
+//EDX: I$4
+//ESI: I$5
+//EDI: 
+
+mov( 9, EDI );
+add( 10, EDI );
+
+//(I$7, IADD, 11, 12)
+
+//EAX: I$2
+//EBX: I$1
+//ECX: I$3
+//EDX: I$4
+//ESI: I$5
+//EDI: I$6
+
+mov( 11, EBX );
+add( 12, EBX );
+
+//(I$8, IADD, 13, 14)
+
+//EAX: I$2
+//EBX: I$7
+//ECX: I$3
+//EDX: I$4
+//ESI: I$5
+//EDI: I$6
+
+push( EAX );
+mov( 13, EAX );
+add( 14, EAX );
+
+//(I$9, IADD, I$7, I$8)
+
+//EAX: I$8
+//EBX: I$7
+//ECX: I$3
+//EDX: I$4
+//ESI: I$5
+//EDI: I$6
+
+add( EAX, EBX );
+
+//(I$10, IADD, I$6, I$9)
+
+//EAX: I$8
+//EBX: I$9
+//ECX: I$3
+//EDX: I$4
+//ESI: I$5
+//EDI: I$6
+
+add( EBX, EDI );
+
+//(I$11, IADD, I$5, I$10)
+
+//EAX: I$8
+//EBX: I$9
+//ECX: I$3
+//EDX: I$4
+//ESI: I$5
+//EDI: I$10
+
+add( EDI, ESI );
+
+//(I$12, IADD, I$4, I$11)
+
+//EAX: I$8
+//EBX: I$9
+//ECX: I$3
+//EDX: I$4
+//ESI: I$11
+//EDI: I$10
+
+add( ESI, EDX );
+
+//(I$13, IADD, I$3, I$12)
+
+//EAX: I$8
+//EBX: I$9
+//ECX: I$3
+//EDX: I$12
+//ESI: I$11
+//EDI: I$10
+
+add( EDX, ECX );
+
+//(I$14, IADD, I$2, I$13)
+
+//EAX: I$8
+//EBX: I$9
+//ECX: I$13
+//EDX: I$12
+//ESI: I$11
+//EDI: I$10
+
+pop( EAX );
+add( ECX, EAX );
+
+//(x, SUBSTORE, I$14, -)
+
+//EAX: I$14
+//EBX: I$9
+//ECX: I$13
+//EDX: I$12
+//ESI: I$11
+//EDI: I$10
+
+mov( EAX, x );
+
+//(-, CALL, PRINTF, -)
+
+//EAX: I$14
+//EBX: I$9
+//ECX: I$13
+//EDX: I$12
+//ESI: I$11
+//EDI: I$10
+
+
+//(-, BEGINOUTPUTPARAMETER,  "%d", -)
+
+//EAX: I$14
+//EBX: I$9
+//ECX: I$13
+//EDX: I$12
+//ESI: I$11
+//EDI: I$10
+
+stdout.put(" ");
+
+//(-, OUTPUTPARAMETER, x, 1)
+
+//EAX: I$14
+//EBX: I$9
+//ECX: I$13
+//EDX: I$12
+//ESI: I$11
+//EDI: I$10
+
+stdout.puti32Size(x, 1, ' ');
+
+//(-, ENDOUTPUTPARAMETER, -, -)
+
+//EAX: I$14
+//EBX: I$9
+//ECX: I$13
+//EDX: I$12
+//ESI: I$11
+//EDI: I$10
+
+
+//(-, ENDOFCALCULATIONS, -, -)
+
+//EAX: I$14
+//EBX: I$9
+//ECX: I$13
+//EDX: I$12
+//ESI: I$11
+//EDI: I$10
+
+
+//(spillage, PROGRAMEND, -, -)
+
+//EAX: I$14
+//EBX: I$9
+//ECX: I$13
+//EDX: I$12
+//ESI: I$11
+//EDI: I$10
+
+stdout.put(nl);
+end spillage;

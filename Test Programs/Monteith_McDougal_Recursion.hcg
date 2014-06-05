@@ -1,0 +1,20 @@
+/* This program demonstrates recursion! */
+##+13##
+PROGRAM recursion
+   DECLARE
+      INTEGER x;
+   END
+   
+   PROCEDURE recproc{VALUE INTEGER x}
+      OUTPUT " %d ", x;
+      IF(x < 10) THEN
+         x <- x + 1;
+         CALL recproc{VALUE x};
+      END;
+   END
+   
+   MAIN
+      x <- 0;
+      CALL recproc{VALUE x};
+   END
+END

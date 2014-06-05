@@ -1,0 +1,448 @@
+
+//(scoping, PROGRAMBEGIN, , )
+
+EAX: 
+EBX: 
+ECX: 
+EDX: 
+ESI: 
+EDI: 
+Stack (Top): 
+program scoping;
+#include ( "stdlib.hhf" )
+
+//(x, MEMORY, 1, -)
+
+EAX: 
+EBX: 
+ECX: 
+EDX: 
+ESI: 
+EDI: 
+Stack (Top): 
+static
+x: dword;
+
+//(y, MEMORY, 1, -)
+
+EAX: 
+EBX: 
+ECX: 
+EDX: 
+ESI: 
+EDI: 
+Stack (Top): 
+y: dword;
+
+//(localvars, PROCEDUREBEGIN, -, -)
+
+EAX: 
+EBX: 
+ECX: 
+EDX: 
+ESI: 
+EDI: 
+Stack (Top): 
+
+//(-, NOFORMALPARAMETERS, -, -)
+
+EAX: 
+EBX: 
+ECX: 
+EDX: 
+ESI: 
+EDI: 
+Stack (Top): 
+procedure localvars;
+
+//(x, MEMORY, 1, -)
+
+EAX: 
+EBX: 
+ECX: 
+EDX: 
+ESI: 
+EDI: 
+Stack (Top): 
+var
+x: dword;
+
+//(y, MEMORY, 1, -)
+
+EAX: 
+EBX: 
+ECX: 
+EDX: 
+ESI: 
+EDI: 
+Stack (Top): 
+y: dword;
+
+//(x, SUBSTORE, 12, -)
+
+EAX: 
+EBX: 
+ECX: 
+EDX: 
+ESI: 
+EDI: 
+Stack (Top): 
+begin localvars;
+mov( 12, x );
+
+//(y, SUBSTORE, 10, -)
+
+EAX: 
+EBX: 
+ECX: 
+EDX: 
+ESI: 
+EDI: 
+Stack (Top): 
+mov( 10, y );
+
+//(-, CALL, PRINTF, -)
+
+EAX: 
+EBX: 
+ECX: 
+EDX: 
+ESI: 
+EDI: 
+Stack (Top): 
+
+//(-, BEGINOUTPUTPARAMETER,  "%d \n", -)
+
+EAX: 
+EBX: 
+ECX: 
+EDX: 
+ESI: 
+EDI: 
+Stack (Top): 
+stdout.put(" ");
+
+//(-, OUTPUTPARAMETER, x, 1)
+
+EAX: 
+EBX: 
+ECX: 
+EDX: 
+ESI: 
+EDI: 
+Stack (Top): 
+stdout.puti32Size(x, 1, ' ');
+stdout.put(nl);
+
+//(-, ENDOUTPUTPARAMETER, -, -)
+
+EAX: 
+EBX: 
+ECX: 
+EDX: 
+ESI: 
+EDI: 
+Stack (Top): 
+
+//(-, CALL, PRINTF, -)
+
+EAX: 
+EBX: 
+ECX: 
+EDX: 
+ESI: 
+EDI: 
+Stack (Top): 
+
+//(-, BEGINOUTPUTPARAMETER,  "%d \n", -)
+
+EAX: 
+EBX: 
+ECX: 
+EDX: 
+ESI: 
+EDI: 
+Stack (Top): 
+stdout.put(" ");
+
+//(-, OUTPUTPARAMETER, y, 1)
+
+EAX: 
+EBX: 
+ECX: 
+EDX: 
+ESI: 
+EDI: 
+Stack (Top): 
+stdout.puti32Size(y, 1, ' ');
+stdout.put(nl);
+
+//(-, ENDOUTPUTPARAMETER, -, -)
+
+EAX: 
+EBX: 
+ECX: 
+EDX: 
+ESI: 
+EDI: 
+Stack (Top): 
+
+//(localvars, ENDPROCEDURE, -, -)
+
+EAX: 
+EBX: 
+ECX: 
+EDX: 
+ESI: 
+EDI: 
+Stack (Top): 
+end localvars;
+
+//(MAIN, LABEL, -, -)
+
+EAX: 
+EBX: 
+ECX: 
+EDX: 
+ESI: 
+EDI: 
+Stack (Top): 
+begin scoping;
+MAIN:
+
+//(x, SUBSTORE, 4, -)
+
+EAX: 
+EBX: 
+ECX: 
+EDX: 
+ESI: 
+EDI: 
+Stack (Top): 
+mov( 4, x );
+
+//(y, SUBSTORE, 5, -)
+
+EAX: 
+EBX: 
+ECX: 
+EDX: 
+ESI: 
+EDI: 
+Stack (Top): 
+mov( 5, y );
+
+//(-, CALL, PRINTF, -)
+
+EAX: 
+EBX: 
+ECX: 
+EDX: 
+ESI: 
+EDI: 
+Stack (Top): 
+
+//(-, BEGINOUTPUTPARAMETER,  "%d \n", -)
+
+EAX: 
+EBX: 
+ECX: 
+EDX: 
+ESI: 
+EDI: 
+Stack (Top): 
+stdout.put(" ");
+
+//(-, OUTPUTPARAMETER, x, 1)
+
+EAX: 
+EBX: 
+ECX: 
+EDX: 
+ESI: 
+EDI: 
+Stack (Top): 
+stdout.puti32Size(x, 1, ' ');
+stdout.put(nl);
+
+//(-, ENDOUTPUTPARAMETER, -, -)
+
+EAX: 
+EBX: 
+ECX: 
+EDX: 
+ESI: 
+EDI: 
+Stack (Top): 
+
+//(-, CALL, PRINTF, -)
+
+EAX: 
+EBX: 
+ECX: 
+EDX: 
+ESI: 
+EDI: 
+Stack (Top): 
+
+//(-, BEGINOUTPUTPARAMETER,  "%d \n", -)
+
+EAX: 
+EBX: 
+ECX: 
+EDX: 
+ESI: 
+EDI: 
+Stack (Top): 
+stdout.put(" ");
+
+//(-, OUTPUTPARAMETER, y, 1)
+
+EAX: 
+EBX: 
+ECX: 
+EDX: 
+ESI: 
+EDI: 
+Stack (Top): 
+stdout.puti32Size(y, 1, ' ');
+stdout.put(nl);
+
+//(-, ENDOUTPUTPARAMETER, -, -)
+
+EAX: 
+EBX: 
+ECX: 
+EDX: 
+ESI: 
+EDI: 
+Stack (Top): 
+
+//(localvars, PROCCALL, -, -)
+
+EAX: 
+EBX: 
+ECX: 
+EDX: 
+ESI: 
+EDI: 
+Stack (Top): 
+
+//(-, NOACTUALPARAMETERS, -, -)
+
+EAX: 
+EBX: 
+ECX: 
+EDX: 
+ESI: 
+EDI: 
+Stack (Top): 
+call localvars;
+
+//(-, CALL, PRINTF, -)
+
+EAX: 
+EBX: 
+ECX: 
+EDX: 
+ESI: 
+EDI: 
+Stack (Top): 
+
+//(-, BEGINOUTPUTPARAMETER,  "%d \n", -)
+
+EAX: 
+EBX: 
+ECX: 
+EDX: 
+ESI: 
+EDI: 
+Stack (Top): 
+stdout.put(" ");
+
+//(-, OUTPUTPARAMETER, x, 1)
+
+EAX: 
+EBX: 
+ECX: 
+EDX: 
+ESI: 
+EDI: 
+Stack (Top): 
+stdout.puti32Size(x, 1, ' ');
+stdout.put(nl);
+
+//(-, ENDOUTPUTPARAMETER, -, -)
+
+EAX: 
+EBX: 
+ECX: 
+EDX: 
+ESI: 
+EDI: 
+Stack (Top): 
+
+//(-, CALL, PRINTF, -)
+
+EAX: 
+EBX: 
+ECX: 
+EDX: 
+ESI: 
+EDI: 
+Stack (Top): 
+
+//(-, BEGINOUTPUTPARAMETER,  "%d \n", -)
+
+EAX: 
+EBX: 
+ECX: 
+EDX: 
+ESI: 
+EDI: 
+Stack (Top): 
+stdout.put(" ");
+
+//(-, OUTPUTPARAMETER, y, 1)
+
+EAX: 
+EBX: 
+ECX: 
+EDX: 
+ESI: 
+EDI: 
+Stack (Top): 
+stdout.puti32Size(y, 1, ' ');
+stdout.put(nl);
+
+//(-, ENDOUTPUTPARAMETER, -, -)
+
+EAX: 
+EBX: 
+ECX: 
+EDX: 
+ESI: 
+EDI: 
+Stack (Top): 
+
+//(-, ENDOFCALCULATIONS, -, -)
+
+EAX: 
+EBX: 
+ECX: 
+EDX: 
+ESI: 
+EDI: 
+Stack (Top): 
+
+//(scoping, PROGRAMEND, -, -)
+
+EAX: 
+EBX: 
+ECX: 
+EDX: 
+ESI: 
+EDI: 
+Stack (Top): 
+stdout.put(nl);
+end scoping;

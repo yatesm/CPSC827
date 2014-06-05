@@ -1,0 +1,232 @@
+start
+prog body END
+prog
+PROGRAM var
+body
+declpart procpart execpart
+body
+declpart execpart
+declpart
+DECLARE decllist END
+decllist
+decllist-
+decllist-
+decllist- declstat ;
+decllist-
+declstat ;
+declstat
+declstat-
+declstat-
+declstat- , var
+declstat-
+declstat- , var = constant
+declstat-
+type var
+declstat-
+type var = constant
+declstat-
+type var integer
+declstat-
+type var integer :: integer
+type
+INTEGER
+type
+REAL
+procpart
+proclist
+proclist
+proclist proc
+proclist
+proc
+proc
+prochead declpart statlist END
+proc
+prochead statlist END
+prochead
+procname null-list
+prochead
+procname fparmlist }
+procname
+PROCEDURE var
+null-list
+{ }
+fparmlist
+fparmlist-
+fparmlist-
+fparmlist- , calltype type var
+fparmlist-
+fparmlist- , calltype type var integer
+fparmlist-
+fparmlist- , calltype type var integer :: integer
+fparmlist-
+{ calltype type var
+fparmlist-
+{ calltype type var integer
+fparmlist-
+{ calltype type var integer :: integer
+calltype
+VALUE
+calltype
+REFERENCE
+execpart
+exechead statlist END
+exechead
+MAIN
+statlist
+statlist-
+statlist-
+statlist- stat
+statlist-
+stat
+stat
+whilestat ;
+stat
+ifstat ;
+stat
+assignstat
+stat
+inputstat- ;
+stat
+outputstat- ;
+stat
+callstat ;
+inputstat-
+inputstat
+inputstat
+inputstat , var
+inputstat
+inputstat , var [ astat ]
+inputstat
+inputstat , var [ astat : astat ]
+inputstat
+INPUT string , var
+inputstat
+INPUT string , var [ astat ]
+inputstat
+INPUT string , var [ astat : astat ]
+outputstat-
+outputstat
+outputstat
+outputstat , var
+outputstat
+outputstat , var [ astat ]
+outputstat
+outputstat , var [ astat : astat ]
+outputstat
+OUTPUT string , var
+outputstat
+OUTPUT string , var [ astat ]
+outputstat
+OUTPUT string , var [ astat : astat ]
+callstat
+callname null-list
+callstat
+callname aparmlist }
+callname
+CALL var
+aparmlist
+aparmlist-
+aparmlist-
+aparmlist- , calltype var
+aparmlist-
+aparmlist- , calltype var [ astat ]
+aparmlist-
+aparmlist- , calltype var [ astat : astat ]
+aparmlist-
+{ calltype var
+aparmlist-
+{ calltype var [ astat ]
+aparmlist-
+{ calltype var [ astat : astat ]
+ifstat
+ifhead statlist END
+ifstat
+ifthen statlist END
+ifthen
+ifhead statlist ELSE
+ifhead
+IF ( bexpr ) THEN
+whilestat
+whilecond statlist END
+whilecond
+whilehead ( bexpr ) DO
+whilehead
+WHILE
+assignstat
+astat ;
+astat
+var <- aexpr
+astat
+var [ astat ] <- aexpr
+astat
+var [ astat : astat ] <- aexpr
+astat
+bexpr
+bexpr
+bexpr-
+bexpr-
+bexpr- || andexpr
+bexpr-
+andexpr
+andexpr
+andexpr-
+andexpr-
+andexpr- && notexpr
+andexpr-
+notexpr
+notexpr
+notexpr-
+notexpr-
+! relexpr
+notexpr-
+relexpr
+relexpr
+relexpr-
+relexpr-
+aexpr < aexpr
+relexpr-
+aexpr <= aexpr
+relexpr-
+aexpr > aexpr
+relexpr-
+aexpr >= aexpr
+relexpr-
+aexpr == aexpr
+relexpr-
+aexpr != aexpr
+relexpr-
+aexpr
+aexpr
+aexpr-
+aexpr-
+aexpr- + term
+aexpr-
+aexpr- - term
+aexpr-
+- term
+aexpr-
+term
+term
+term-
+term-
+term- * primary
+term-
+term- / primary
+term-
+primary
+primary
+primary-
+primary-
+( bexpr )
+primary-
+var [ astat : astat ]
+primary-
+var [ astat ]
+primary-
+var
+primary-
+constant
+constant
+integer
+constant
+real

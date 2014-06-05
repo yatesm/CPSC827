@@ -1,0 +1,13 @@
+/* This program demonstrates register spillage! */
+##+13##
+
+PROGRAM spillage
+  DECLARE
+      INTEGER x;
+  END
+  
+  MAIN
+    x <- ((1 + 2) + ((3 + 4) + ((5 + 6) + ((7 + 8) + ((9 + 10) + ((11 + 12) + (2 + 1))))));
+    OUTPUT "%d", x;
+  END
+END

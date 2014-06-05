@@ -1,0 +1,120 @@
+
+//(scoping, PROGRAMBEGIN, , )
+program scoping;
+#include ( "stdlib.hhf" )
+
+//(x, MEMORY, 1, -)
+static
+x: dword;
+
+//(y, MEMORY, 1, -)
+y: dword;
+
+//(localvars, PROCEDUREBEGIN, -, -)
+
+//(-, NOFORMALPARAMETERS, -, -)
+procedure localvars;
+
+//(x, MEMORY, 1, -)
+var
+x: dword;
+
+//(y, MEMORY, 1, -)
+y: dword;
+
+//(x, SUBSTORE, 12, -)
+begin localvars;
+mov( 12, x );
+
+//(y, SUBSTORE, 10, -)
+mov( 10, y );
+
+//(-, CALL, PRINTF, -)
+
+//(-, BEGINOUTPUTPARAMETER,  "%d \n", -)
+stdout.put(" ");
+
+//(-, OUTPUTPARAMETER, x, 1)
+stdout.puti32Size(x, 1, ' ');
+stdout.put(nl);
+
+//(-, ENDOUTPUTPARAMETER, -, -)
+
+//(-, CALL, PRINTF, -)
+
+//(-, BEGINOUTPUTPARAMETER,  "%d \n", -)
+stdout.put(" ");
+
+//(-, OUTPUTPARAMETER, y, 1)
+stdout.puti32Size(y, 1, ' ');
+stdout.put(nl);
+
+//(-, ENDOUTPUTPARAMETER, -, -)
+
+//(localvars, ENDPROCEDURE, -, -)
+end localvars;
+
+//(MAIN, LABEL, -, -)
+begin scoping;
+MAIN:
+
+//(x, SUBSTORE, 4, -)
+mov( 4, x );
+
+//(y, SUBSTORE, 5, -)
+mov( 5, y );
+
+//(-, CALL, PRINTF, -)
+
+//(-, BEGINOUTPUTPARAMETER,  "%d \n", -)
+stdout.put(" ");
+
+//(-, OUTPUTPARAMETER, x, 1)
+stdout.puti32Size(x, 1, ' ');
+stdout.put(nl);
+
+//(-, ENDOUTPUTPARAMETER, -, -)
+
+//(-, CALL, PRINTF, -)
+
+//(-, BEGINOUTPUTPARAMETER,  "%d \n", -)
+stdout.put(" ");
+
+//(-, OUTPUTPARAMETER, y, 1)
+stdout.puti32Size(y, 1, ' ');
+stdout.put(nl);
+
+//(-, ENDOUTPUTPARAMETER, -, -)
+
+//(localvars, PROCCALL, -, -)
+
+//(-, NOACTUALPARAMETERS, -, -)
+call localvars;
+
+//(-, CALL, PRINTF, -)
+
+//(-, BEGINOUTPUTPARAMETER,  "%d \n", -)
+stdout.put(" ");
+
+//(-, OUTPUTPARAMETER, x, 1)
+stdout.puti32Size(x, 1, ' ');
+stdout.put(nl);
+
+//(-, ENDOUTPUTPARAMETER, -, -)
+
+//(-, CALL, PRINTF, -)
+
+//(-, BEGINOUTPUTPARAMETER,  "%d \n", -)
+stdout.put(" ");
+
+//(-, OUTPUTPARAMETER, y, 1)
+stdout.puti32Size(y, 1, ' ');
+stdout.put(nl);
+
+//(-, ENDOUTPUTPARAMETER, -, -)
+
+//(-, ENDOFCALCULATIONS, -, -)
+
+//(scoping, PROGRAMEND, -, -)
+stdout.put(nl);
+end scoping;

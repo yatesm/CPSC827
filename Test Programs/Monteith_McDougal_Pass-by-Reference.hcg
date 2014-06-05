@@ -1,0 +1,18 @@
+/* This program demonstrates procedures with pass by reference */
+##+13##
+PROGRAM referencetest
+  DECLARE
+      INTEGER x;
+  END
+  
+  PROCEDURE reftest{REFERENCE INTEGER x}  
+    x <- x - 1;
+  END /* End of reftest */
+  
+  MAIN
+    x <- 5;
+    OUTPUT "%d", x;
+    CALL reftest{REFERENCE x};
+    OUTPUT "%d", x;
+  END
+END

@@ -1,0 +1,466 @@
+<productions>
+	<production>
+		<lhs>start</lhs>
+		<rhs>prog  body  END</rhs>
+	</production>
+	<production>
+		<lhs>prog</lhs>
+		<rhs>PROGRAM  var</rhs>
+	</production>
+	<production>
+		<lhs>body</lhs>
+		<rhs>declpart  procpart  execpart</rhs>
+	</production>
+	<production>
+		<lhs>body</lhs>
+		<rhs>declpart  execpart</rhs>
+	</production>
+	<production>
+		<lhs>declpart</lhs>
+		<rhs>DECLARE  decllist  END</rhs>
+	</production>
+	<production>
+		<lhs>decllist</lhs>
+		<rhs>decllist-</rhs>
+	</production>
+	<production>
+		<lhs>decllist-</lhs>
+		<rhs>decllist-  declstat  ;</rhs>
+	</production>
+	<production>
+		<lhs>decllist-</lhs>
+		<rhs>declstat  ;</rhs>
+	</production>
+	<production>
+		<lhs>declstat</lhs>
+		<rhs>declstat-</rhs>
+	</production>
+	<production>
+		<lhs>declstat-</lhs>
+		<rhs>declstat-  ,  var</rhs>
+	</production>
+	<production>
+		<lhs>declstat-</lhs>
+		<rhs>declstat-  ,  var  =  constant</rhs>
+	</production>
+	<production>
+		<lhs>declstat-</lhs>
+		<rhs>type  var</rhs>
+	</production>
+	<production>
+		<lhs>declstat-</lhs>
+		<rhs>type  var  =  constant</rhs>
+	</production>
+	<production>
+		<lhs>declstat-</lhs>
+		<rhs>type  var  integer</rhs>
+	</production>
+	<production>
+		<lhs>declstat-</lhs>
+		<rhs>type  var  integer  ::  integer</rhs>
+	</production>
+	<production>
+		<lhs>type</lhs>
+		<rhs>INTEGER</rhs>
+	</production>
+	<production>
+		<lhs>type</lhs>
+		<rhs>REAL</rhs>
+	</production>
+	<production>
+		<lhs>procpart</lhs>
+		<rhs>proclist</rhs>
+	</production>
+	<production>
+		<lhs>proclist</lhs>
+		<rhs>proclist  proc</rhs>
+	</production>
+	<production>
+		<lhs>proclist</lhs>
+		<rhs>proc</rhs>
+	</production>
+	<production>
+		<lhs>proc</lhs>
+		<rhs>prochead  declpart  statlist  END</rhs>
+	</production>
+	<production>
+		<lhs>proc</lhs>
+		<rhs>prochead  statlist  END</rhs>
+	</production>
+	<production>
+		<lhs>prochead</lhs>
+		<rhs>procname  null-list</rhs>
+	</production>
+	<production>
+		<lhs>prochead</lhs>
+		<rhs>procname  fparmlist  }</rhs>
+	</production>
+	<production>
+		<lhs>procname</lhs>
+		<rhs>PROCEDURE  var</rhs>
+	</production>
+	<production>
+		<lhs>null-list</lhs>
+		<rhs></rhs>
+	</production>
+	<production>
+		<lhs>fparmlist</lhs>
+		<rhs>fparmlist-</rhs>
+	</production>
+	<production>
+		<lhs>fparmlist-</lhs>
+		<rhs>fparmlist-  ,  calltype  type  var</rhs>
+	</production>
+	<production>
+		<lhs>fparmlist-</lhs>
+		<rhs>fparmlist-  ,  calltype  type  var  integer</rhs>
+	</production>
+	<production>
+		<lhs>fparmlist-</lhs>
+		<rhs>fparmlist-  ,  calltype  type  var  integer  ::  integer</rhs>
+	</production>
+	<production>
+		<lhs>fparmlist-</lhs>
+		<rhs>{  calltype  type  var</rhs>
+	</production>
+	<production>
+		<lhs>fparmlist-</lhs>
+		<rhs>{  calltype  type  var  integer</rhs>
+	</production>
+	<production>
+		<lhs>fparmlist-</lhs>
+		<rhs>{  calltype  type  var  integer  ::  integer</rhs>
+	</production>
+	<production>
+		<lhs>calltype</lhs>
+		<rhs>VALUE</rhs>
+	</production>
+	<production>
+		<lhs>calltype</lhs>
+		<rhs>REFERENCE</rhs>
+	</production>
+	<production>
+		<lhs>execpart</lhs>
+		<rhs>exechead  statlist  END</rhs>
+	</production>
+	<production>
+		<lhs>exechead</lhs>
+		<rhs>MAIN</rhs>
+	</production>
+	<production>
+		<lhs>statlist</lhs>
+		<rhs>statlist-</rhs>
+	</production>
+	<production>
+		<lhs>statlist-</lhs>
+		<rhs>statlist-  stat</rhs>
+	</production>
+	<production>
+		<lhs>statlist-</lhs>
+		<rhs>stat</rhs>
+	</production>
+	<production>
+		<lhs>stat</lhs>
+		<rhs>whilestat  ;</rhs>
+	</production>
+	<production>
+		<lhs>stat</lhs>
+		<rhs>ifstat  ;</rhs>
+	</production>
+	<production>
+		<lhs>stat</lhs>
+		<rhs>assignstat</rhs>
+	</production>
+	<production>
+		<lhs>stat</lhs>
+		<rhs>inputstat-  ;</rhs>
+	</production>
+	<production>
+		<lhs>stat</lhs>
+		<rhs>outputstat-  ;</rhs>
+	</production>
+	<production>
+		<lhs>stat</lhs>
+		<rhs>callstat  ;</rhs>
+	</production>
+	<production>
+		<lhs>inputstat-</lhs>
+		<rhs>inputstat</rhs>
+	</production>
+	<production>
+		<lhs>inputstat</lhs>
+		<rhs>inputstat  ,  var</rhs>
+	</production>
+	<production>
+		<lhs>inputstat</lhs>
+		<rhs>inputstat  ,  var  [  astat  ]</rhs>
+	</production>
+	<production>
+		<lhs>inputstat</lhs>
+		<rhs>inputstat  ,  var  [  astat  :  astat  ]</rhs>
+	</production>
+	<production>
+		<lhs>inputstat</lhs>
+		<rhs>INPUT  string  ,  var</rhs>
+	</production>
+	<production>
+		<lhs>inputstat</lhs>
+		<rhs>INPUT  string  ,  var  [  astat  ]</rhs>
+	</production>
+	<production>
+		<lhs>inputstat</lhs>
+		<rhs>INPUT  string  ,  var  [  astat  :  astat  ]</rhs>
+	</production>
+	<production>
+		<lhs>outputstat-</lhs>
+		<rhs>outputstat</rhs>
+	</production>
+	<production>
+		<lhs>outputstat</lhs>
+		<rhs>outputstat  ,  var</rhs>
+	</production>
+	<production>
+		<lhs>outputstat</lhs>
+		<rhs>outputstat  ,  var  [  astat  ]</rhs>
+	</production>
+	<production>
+		<lhs>outputstat</lhs>
+		<rhs>outputstat  ,  var  [  astat  :  astat  ]</rhs>
+	</production>
+	<production>
+		<lhs>outputstat</lhs>
+		<rhs>OUTPUT  string  ,  var</rhs>
+	</production>
+	<production>
+		<lhs>outputstat</lhs>
+		<rhs>OUTPUT  string  ,  var  [  astat  ]</rhs>
+	</production>
+	<production>
+		<lhs>outputstat</lhs>
+		<rhs>OUTPUT  string  ,  var  [  astat  :  astat  ]</rhs>
+	</production>
+	<production>
+		<lhs>callstat</lhs>
+		<rhs>callname  null-list</rhs>
+	</production>
+	<production>
+		<lhs>callstat</lhs>
+		<rhs>callname  aparmlist  }</rhs>
+	</production>
+	<production>
+		<lhs>callname</lhs>
+		<rhs>CALL  var</rhs>
+	</production>
+	<production>
+		<lhs>aparmlist</lhs>
+		<rhs>aparmlist-</rhs>
+	</production>
+	<production>
+		<lhs>aparmlist-</lhs>
+		<rhs>aparmlist-  ,  calltype  var</rhs>
+	</production>
+	<production>
+		<lhs>aparmlist-</lhs>
+		<rhs>aparmlist-  ,  calltype  var  [  astat  ]</rhs>
+	</production>
+	<production>
+		<lhs>aparmlist-</lhs>
+		<rhs>aparmlist-  ,  calltype  var  [  astat  :  astat  ]</rhs>
+	</production>
+	<production>
+		<lhs>aparmlist-</lhs>
+		<rhs>{  calltype  var</rhs>
+	</production>
+	<production>
+		<lhs>aparmlist-</lhs>
+		<rhs>{  calltype  var  [  astat  ]</rhs>
+	</production>
+	<production>
+		<lhs>aparmlist-</lhs>
+		<rhs>{  calltype  var  [  astat  :  astat  ]</rhs>
+	</production>
+	<production>
+		<lhs>ifstat</lhs>
+		<rhs>ifhead  statlist  END</rhs>
+	</production>
+	<production>
+		<lhs>ifstat</lhs>
+		<rhs>ifthen  statlist  END</rhs>
+	</production>
+	<production>
+		<lhs>ifthen</lhs>
+		<rhs>ifhead  statlist  ELSE</rhs>
+	</production>
+	<production>
+		<lhs>ifhead</lhs>
+		<rhs>IF  (  bexpr  )  THEN</rhs>
+	</production>
+	<production>
+		<lhs>whilestat</lhs>
+		<rhs>whilecond  statlist  END</rhs>
+	</production>
+	<production>
+		<lhs>whilecond</lhs>
+		<rhs>whilehead  (  bexpr  )  DO</rhs>
+	</production>
+	<production>
+		<lhs>whilehead</lhs>
+		<rhs>WHILE</rhs>
+	</production>
+	<production>
+		<lhs>assignstat</lhs>
+		<rhs>astat  ;</rhs>
+	</production>
+	<production>
+		<lhs>astat</lhs>
+		<rhs>var  &lt;-  aexpr</rhs>
+	</production>
+	<production>
+		<lhs>astat</lhs>
+		<rhs>var  [  astat  ]  &lt;-  aexpr</rhs>
+	</production>
+	<production>
+		<lhs>astat</lhs>
+		<rhs>var  [  astat  :  astat  ]  &lt;-  aexpr</rhs>
+	</production>
+	<production>
+		<lhs>astat</lhs>
+		<rhs>bexpr</rhs>
+	</production>
+	<production>
+		<lhs>bexpr</lhs>
+		<rhs>bexpr-</rhs>
+	</production>
+	<production>
+		<lhs>bexpr-</lhs>
+		<rhs>bexpr-  ||  andexpr</rhs>
+	</production>
+	<production>
+		<lhs>bexpr-</lhs>
+		<rhs>andexpr</rhs>
+	</production>
+	<production>
+		<lhs>andexpr</lhs>
+		<rhs>andexpr-</rhs>
+	</production>
+	<production>
+		<lhs>andexpr-</lhs>
+		<rhs>andexpr-  &amp;&amp;  notexpr</rhs>
+	</production>
+	<production>
+		<lhs>andexpr-</lhs>
+		<rhs>notexpr</rhs>
+	</production>
+	<production>
+		<lhs>notexpr</lhs>
+		<rhs>notexpr-</rhs>
+	</production>
+	<production>
+		<lhs>notexpr-</lhs>
+		<rhs>relexpr</rhs>
+	</production>
+	<production>
+		<lhs>notexpr-</lhs>
+		<rhs>relexpr</rhs>
+	</production>
+	<production>
+		<lhs>relexpr</lhs>
+		<rhs>relexpr-</rhs>
+	</production>
+	<production>
+		<lhs>relexpr-</lhs>
+		<rhs>aexpr  &lt;  aexpr</rhs>
+	</production>
+	<production>
+		<lhs>relexpr-</lhs>
+		<rhs>aexpr  &lt;=  aexpr</rhs>
+	</production>
+	<production>
+		<lhs>relexpr-</lhs>
+		<rhs>aexpr  &gt;  aexpr</rhs>
+	</production>
+	<production>
+		<lhs>relexpr-</lhs>
+		<rhs>aexpr  &gt;=  aexpr</rhs>
+	</production>
+	<production>
+		<lhs>relexpr-</lhs>
+		<rhs>aexpr  ==  aexpr</rhs>
+	</production>
+	<production>
+		<lhs>relexpr-</lhs>
+		<rhs>aexpr  !=  aexpr</rhs>
+	</production>
+	<production>
+		<lhs>relexpr-</lhs>
+		<rhs>aexpr</rhs>
+	</production>
+	<production>
+		<lhs>aexpr</lhs>
+		<rhs>aexpr-</rhs>
+	</production>
+	<production>
+		<lhs>aexpr-</lhs>
+		<rhs>aexpr-  +  term</rhs>
+	</production>
+	<production>
+		<lhs>aexpr-</lhs>
+		<rhs>aexpr-  -  term</rhs>
+	</production>
+	<production>
+		<lhs>aexpr-</lhs>
+		<rhs>-  term</rhs>
+	</production>
+	<production>
+		<lhs>aexpr-</lhs>
+		<rhs>term</rhs>
+	</production>
+	<production>
+		<lhs>term</lhs>
+		<rhs>term-</rhs>
+	</production>
+	<production>
+		<lhs>term-</lhs>
+		<rhs>term-  *  primary</rhs>
+	</production>
+	<production>
+		<lhs>term-</lhs>
+		<rhs>term-  /  primary</rhs>
+	</production>
+	<production>
+		<lhs>term-</lhs>
+		<rhs>primary</rhs>
+	</production>
+	<production>
+		<lhs>primary</lhs>
+		<rhs>primary-</rhs>
+	</production>
+	<production>
+		<lhs>primary-</lhs>
+		<rhs>bexpr  )</rhs>
+	</production>
+	<production>
+		<lhs>primary-</lhs>
+		<rhs>var  [  astat  :  astat  ]</rhs>
+	</production>
+	<production>
+		<lhs>primary-</lhs>
+		<rhs>var  [  astat  ]</rhs>
+	</production>
+	<production>
+		<lhs>primary-</lhs>
+		<rhs>var</rhs>
+	</production>
+	<production>
+		<lhs>primary-</lhs>
+		<rhs>constant</rhs>
+	</production>
+	<production>
+		<lhs>constant</lhs>
+		<rhs>integer</rhs>
+	</production>
+	<production>
+		<lhs>constant</lhs>
+		<rhs>real</rhs>
+	</production>
+</productions>	

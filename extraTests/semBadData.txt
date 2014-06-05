@@ -1,0 +1,27 @@
+##+1 print the source lines##
+/*  This program should contain errors */
+PROGRAM error 
+  DECLARE
+      INTEGER x;
+      INTEGER b;
+      REAL a 75 ;
+      INTEGER c 100 :: 25 ;
+      INTEGER d 100 :: 25 ;
+      REAL f 50 :: 60 ;
+      REAL h 50 :: 60 ;
+      REAL xyz 50 :: 60 ;
+      INTEGER lkj 100 ;
+      REAL i;
+      REAL j;
+  END
+
+  MAIN
+    INPUT  "%d5 - %d5 %d\n", lkj[25], x, b;
+    WHILE (x) DO
+      IF (k == c) THEN
+        lkj[a:b] <- lkj[x:b]*x/b;
+        x <- lkj[i:x]+i/b;
+      END;
+    END;
+  END
+END

@@ -1,0 +1,45 @@
+/* This program adds 2 5x5 matrices */
+##+13##
+PROGRAM matrixaddition
+   DECLARE
+      INTEGER a 5::5, b, c;
+      INTEGER i, j;
+   END
+   
+   MAIN
+      i <- 0;
+      j <- 0;
+      WHILE(i < 6) DO
+         WHILE(j < 6) DO
+            a[i:j] <- 1;
+            b[i:j] <- 2;
+            j <- j + 1;
+         END;
+         i <- i + 1;
+         j <- 0;         
+      END;
+      i <- 0;
+      j <- 0;
+      WHILE(i < 6) DO
+         WHILE(j < 6) DO
+            c[i:j] <- a[i:j] + b[i:j];
+            j <- j + 1;
+         END;
+         j <- 0;
+         i <- i + 1;
+      END;
+      i <- 0;
+      j <- 0;
+      WHILE(i < 6) DO
+      OUTPUT "Row %d   ", i;
+         WHILE(j < 5) DO
+            OUTPUT " %d ", c[i:j];
+            j <- j + 1;
+         END;
+         OUTPUT " %d \n", c[i:j];
+         j <- 0;         
+         i <- i + 1;
+      END;
+   END
+END
+      

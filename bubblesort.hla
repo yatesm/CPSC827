@@ -1,0 +1,293 @@
+
+//(bubblesort, PROGRAMBEGIN, , )
+program bubblesort;
+#include ( "stdlib.hhf" )
+
+//(a, MEMORY, 10, -)
+static
+a: dword[10];
+
+//(i, MEMORY, 1, -)
+i: dword;
+
+//(j, MEMORY, 1, -)
+j: dword;
+
+//(k, MEMORY, 1, -)
+k: dword;
+
+//(swap, MEMORY, 1, -)
+swap: dword;
+
+//(MAIN, LABEL, -, -)
+begin bubblesort;
+MAIN:
+
+//(a, SUBSTORE, 10, 0)
+mov( 0, EAX );
+shl( 2, EAX );
+mov( 10, a[ EAX ]);
+
+//(a, SUBSTORE, 27, 1)
+mov( 1, EAX );
+shl( 2, EAX );
+mov( 27, a[ EAX ]);
+
+//(a, SUBSTORE, -1, 2)
+mov( 2, EAX );
+shl( 2, EAX );
+mov( -1, a[ EAX ]);
+
+//(a, SUBSTORE, 1, 3)
+mov( 3, EAX );
+shl( 2, EAX );
+mov( 1, a[ EAX ]);
+
+//(a, SUBSTORE, 7, 4)
+mov( 4, EAX );
+shl( 2, EAX );
+mov( 7, a[ EAX ]);
+
+//(a, SUBSTORE, 34, 5)
+mov( 5, EAX );
+shl( 2, EAX );
+mov( 34, a[ EAX ]);
+
+//(a, SUBSTORE, 14, 6)
+mov( 6, EAX );
+shl( 2, EAX );
+mov( 14, a[ EAX ]);
+
+//(a, SUBSTORE, 24, 7)
+mov( 7, EAX );
+shl( 2, EAX );
+mov( 24, a[ EAX ]);
+
+//(a, SUBSTORE, 17, 8)
+mov( 8, EAX );
+shl( 2, EAX );
+mov( 17, a[ EAX ]);
+
+//(a, SUBSTORE, 4, 9)
+mov( 9, EAX );
+shl( 2, EAX );
+mov( 4, a[ EAX ]);
+
+//(i, SUBSTORE, 1, -)
+mov( 1, i );
+
+//(-, CALL, PRINTF, -)
+
+//(-, BEGINOUTPUTPARAMETER,  "Before the sort: %d", -)
+stdout.put(" Before the sort: ");
+
+//(I$0, ISUBLOAD, a, 0)
+mov( 0, EAX );
+shl( 2, EAX );
+mov( a[ EAX ], EBX );
+
+//(-, OUTPUTPARAMETER, I$0, -)
+stdout.puti32Size(EBX, 1, ' ');
+
+//(-, ENDOUTPUTPARAMETER, -, -)
+
+//(L$0, LABEL, -, -)
+L0:
+
+//(B$0, ILESS, i, 10)
+cmp( i, 10 );
+
+//(L$1, CJUMPF, B$0, -)
+jge L1;
+
+//(-, CALL, PRINTF, -)
+
+//(-, BEGINOUTPUTPARAMETER,  ", %d", -)
+stdout.put(" , ");
+
+//(I$1, ISUBLOAD, a, i)
+mov( i, EAX );
+shl( 2, EAX );
+mov( a[ EAX ], EBX );
+
+//(-, OUTPUTPARAMETER, I$1, -)
+stdout.puti32Size(EBX, 1, ' ');
+
+//(-, ENDOUTPUTPARAMETER, -, -)
+
+//(I$2, IADD, i, 1)
+mov( i, ECX );
+add( 1, ECX );
+
+//(i, SUBSTORE, I$2, -)
+mov( ECX, i );
+
+//(L$0, JUMP, -, -)
+jmp L0;
+
+//(L$1, LABEL, -, -)
+L1:
+
+//(i, SUBSTORE, 0, -)
+mov( 0, i );
+
+//(L$2, LABEL, -, -)
+L2:
+
+//(B$1, ILESS, i, 10)
+cmp( i, 10 );
+
+//(L$3, CJUMPF, B$1, -)
+jge L3;
+
+//(j, SUBSTORE, 9, -)
+mov( 9, j );
+
+//(L$4, LABEL, -, -)
+L4:
+
+//(B$2, IGREATER, j, i)
+mov( j, EAX );
+cmp( EAX, i );
+
+//(L$5, CJUMPF, B$2, -)
+jle L5;
+
+//(I$3, ISUB, j, 1)
+mov( j, EAX );
+sub( 1, EAX );
+
+//(I$4, ISUBLOAD, a, I$3)
+shl(2, EAX );
+mov( a[ EAX ], EBX );
+
+//(I$5, ISUBLOAD, a, j)
+mov( j, EAX );
+shl( 2, EAX );
+mov( a[ EAX ], ECX );
+
+//(B$3, IGREATER, I$4, I$5)
+cmp( EBX, ECX );
+
+//(L$6, CJUMPF, B$3, -)
+jle L6;
+
+//(I$6, ISUB, j, 1)
+mov( j, EAX );
+sub( 1, EAX );
+
+//(I$7, ISUBLOAD, a, I$6)
+shl(2, EAX );
+mov( a[ EAX ], EBX );
+
+//(swap, SUBSTORE, I$7, -)
+mov( EBX, swap );
+
+//(I$8, ISUB, j, 1)
+mov( j, EAX );
+sub( 1, EAX );
+
+//(I$9, ISUBLOAD, a, j)
+mov( j, ECX );
+shl( 2, ECX );
+mov( a[ ECX ], EDX );
+
+//(a, SUBSTORE, I$9, I$8)
+shl( 2, EAX );
+mov( EDX, a[ EAX ] );
+
+//(a, SUBSTORE, swap, j)
+mov( swap, ESI );
+mov( j, EDI );
+shl( 2, EDI );
+mov( ESI, a [ EDI ] );
+
+//(L$6, LABEL, -, -)
+L6:
+
+//(I$10, ISUB, j, 1)
+mov( j, EAX );
+sub( 1, EAX );
+
+//(j, SUBSTORE, I$10, -)
+mov( EAX, j );
+
+//(L$4, JUMP, -, -)
+jmp L4;
+
+//(L$5, LABEL, -, -)
+L5:
+
+//(I$11, IADD, i, 1)
+mov( i, EAX );
+add( 1, EAX );
+
+//(i, SUBSTORE, I$11, -)
+mov( EAX, i );
+
+//(L$2, JUMP, -, -)
+jmp L2;
+
+//(L$3, LABEL, -, -)
+L3:
+
+//(i, SUBSTORE, 1, -)
+mov( 1, i );
+
+//(-, CALL, PRINTF, -)
+
+//(-, BEGINOUTPUTPARAMETER,  "\nAfter the sort: %d", -)
+stdout.put(" ", nl, "After the sort: ");
+
+//(I$12, ISUBLOAD, a, 0)
+mov( 0, EAX );
+shl( 2, EAX );
+mov( a[ EAX ], EBX );
+
+//(-, OUTPUTPARAMETER, I$12, -)
+stdout.puti32Size(EBX, 1, ' ');
+
+//(-, ENDOUTPUTPARAMETER, -, -)
+
+//(L$7, LABEL, -, -)
+L7:
+
+//(B$4, ILESS, i, 10)
+cmp( i, 10 );
+
+//(L$8, CJUMPF, B$4, -)
+jge L8;
+
+//(-, CALL, PRINTF, -)
+
+//(-, BEGINOUTPUTPARAMETER,  ", %d", -)
+stdout.put(" , ");
+
+//(I$13, ISUBLOAD, a, i)
+mov( i, EAX );
+shl( 2, EAX );
+mov( a[ EAX ], EBX );
+
+//(-, OUTPUTPARAMETER, I$13, -)
+stdout.puti32Size(EBX, 1, ' ');
+
+//(-, ENDOUTPUTPARAMETER, -, -)
+
+//(I$14, IADD, i, 1)
+mov( i, ECX );
+add( 1, ECX );
+
+//(i, SUBSTORE, I$14, -)
+mov( ECX, i );
+
+//(L$7, JUMP, -, -)
+jmp L7;
+
+//(L$8, LABEL, -, -)
+L8:
+
+//(-, ENDOFCALCULATIONS, -, -)
+
+//(bubblesort, PROGRAMEND, -, -)
+stdout.put(nl);
+end bubblesort;

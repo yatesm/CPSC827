@@ -1,0 +1,37 @@
+/* This is a bubblesort program */
+##+13##	
+PROGRAM bubblesort
+    DECLARE
+      INTEGER a 10;
+      INTEGER i, j, k, swap;
+    END
+    MAIN 
+        a[0] <- 10; a[1] <- 27; a[2] <- -1; a[3] <- 1; a[4] <- 7; 
+        a[5] <- 34; a[6] <- 14; a[7] <- 24; a[8] <- 17; a[9] <- 4;
+        i <- 1;
+        OUTPUT "Before the sort: %d", a[0];
+        WHILE(i < 10) DO
+            OUTPUT ", %d", a[i];
+            i <- i + 1;
+        END;
+        i <- 0;
+        WHILE(i < 10) DO
+            j <- 9;        
+            WHILE(j > i) DO
+                IF(a[j - 1] > a[j]) THEN
+                swap <- a[j - 1];
+                a[j - 1] <- a[j];
+                a[j] <- swap;
+                END;
+                j <- j - 1;
+            END;
+            i <- i + 1;
+        END;
+      i <- 1;
+      OUTPUT "\nAfter the sort: %d", a[0];
+      WHILE(i < 10) DO
+          OUTPUT ", %d", a[i];
+          i <- i + 1;
+      END;
+  END
+END

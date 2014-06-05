@@ -1,0 +1,166 @@
+Name: Yates Monteith and Anthony McDougal
+Email JYMONTE@Clemson.edu, MCOUDGL@Clemson.edu
+Timestamp Thu Mar 10 19:42:36 2011
+
+Input Line: /*  This program should not contains any errors */
+Input Line: PROGRAM test
+Input Line:   DECLARE
+Input Line:       INTEGER x;
+				(test, PROGRAMBEGIN, , )
+				(x, MEMORY, 1, -)
+Input Line:       INTEGER i, k, l;
+				(i, MEMORY, 1, -)
+				(k, MEMORY, 1, -)
+				(l, MEMORY, 1, -)
+Input Line:       INTEGER j;
+				(j, MEMORY, 1, -)
+Input Line:       ##+12 print the Semantic Stack Symbolically before and after   ##
+Input Line:       REAL a 75 ,b ;
+SEMANTICS STACK BEFORE REDUCTION
+### test DECLARE x j ; 
+
+SEMANTICS STACK AFTER REDUCTION
+### test DECLARE x 
+
+SEMANTICS STACK BEFORE REDUCTION
+### test DECLARE x REAL 
+
+SEMANTICS STACK AFTER REDUCTION
+### test DECLARE x real 
+
+SEMANTICS STACK BEFORE REDUCTION
+### test DECLARE x real a 75 
+
+				(a, MEMORY, 75, -)
+SEMANTICS STACK AFTER REDUCTION
+### test DECLARE x a 
+
+SEMANTICS STACK BEFORE REDUCTION
+### test DECLARE x a , b 
+
+				(b, MEMORY, 75, -)
+SEMANTICS STACK AFTER REDUCTION
+### test DECLARE x a 
+
+SEMANTICS STACK BEFORE REDUCTION
+### test DECLARE x a 
+
+SEMANTICS STACK AFTER REDUCTION
+### test DECLARE x a 
+
+Input Line:       ##-12 ##
+Input Line:       INTEGER c 100 :: 25 ;
+				(c, MEMORY, 100, 25)
+Input Line:       INTEGER d 100 :: 25 , g, h ;
+				(d, MEMORY, 100, 25)
+				(g, MEMORY, 100, 25)
+				(h, MEMORY, 100, 25)
+Input Line:       ##+15 print the variable symbol table after update  ##
+Input Line:       REAL f 50 :: 60 ;
+-------------------GLOBAL SYMBOL TABLE----------------
+| Identifier  |   Type    |   Shape  |  Rows |  Cols |
+------------------------------------------------------
+|           f |      real |   MATRIX |    50 |    60 | 
+------------------------------------------------------
+				(f, MEMORY, 50, 60)
+Input Line:       ##-15 ##
+Input Line:       REAL help;
+				(help, MEMORY, 1, -)
+Input Line:   END
+Input Line: 
+Input Line:   PROCEDURE hithere{VALUE INTEGER d, REFERENCE REAL tre 125 ,
+				(hithere, PROCEDUREBEGIN, -, -)
+				(-, BEGINFORMALPARAMETERS, -, -)
+				(d, FORMALVALUEPARAMETER, 1, -)
+				(tre, FORMALREFERENCEPARAMETER, 125, -)
+Input Line:                     VALUE INTEGER k 235 :: 543 }
+				(k, FORMALVALUEPARAMETER, 235, 543)
+Input Line:     DECLARE
+Input Line:         INTEGER a;
+				(-, ENDFORMALPARAMATERS, -, -)
+				(a, MEMORY, 1, -)
+Input Line:         INTEGER hcg 75 ;
+				(hcg, MEMORY, 75, -)
+Input Line:         INTEGER def 75 ;
+				(def, MEMORY, 75, -)
+Input Line:     END
+Input Line: 
+Input Line:     IF (a <= 10) THEN
+Input Line:       b <- c + ( d * e ) / f ;
+Input Line:     ELSE
+Input Line:       c <- - b - d * ( e / f ) ;
+Input Line:     END;
+Input Line:     OUTPUT "%d5 - %d5  %d\n", a, b, f[a:b<-b+1];
+Input Line:   END   /* hithere */
+Input Line:   PROCEDURE byethere{VALUE REAL a, REFERENCE REAL k 125 ,
+				(hithere, ENDPROCEDURE, -, -)
+-------------------LOCAL SYMBOL TABLE-----------------------------
+| Identifier  |   Type    |   Shape  |  Rows |  Cols | Call Type |
+------------------------------------------------------------------
+|     hithere | PROCEDURE |        - |     - |     - |         - |
+|           d |       int |   SCALAR |     1 |     - |       val |
+|         tre |      real |   VECTOR |   125 |     - |       ref |
+|           k |       int |   MATRIX |   235 |   543 |       val |
+|           a |       int |   SCALAR |     1 |     - |         - |
+|         hcg |       int |   VECTOR |    75 |     - |         - |
+|         def |       int |   VECTOR |    75 |     - |         - |
+------------------------------------------------------------------
+				(byethere, PROCEDUREBEGIN, -, -)
+				(-, BEGINFORMALPARAMETERS, -, -)
+				(a, FORMALVALUEPARAMETER, 1, -)
+				(k, FORMALREFERENCEPARAMETER, 125, -)
+Input Line:                      VALUE REAL tre 235 :: 543 }
+				(tre, FORMALVALUEPARAMETER, 235, 543)
+Input Line:     a <- k[100] + ( lkj[d] * tre[1:2] ) ;
+				(-, ENDFORMALPARAMATERS, -, -)
+Input Line:     d <- - d - tre[b:d] * ( x / k[d] ) ;
+Input Line:     INPUT "5d,%d,%d\n", a, d, tre[b:b<-b+1];
+Input Line:   END   /* bythere */
+Input Line: 
+Input Line:   MAIN
+Input Line:     OUTPUT "%d5 - %d5 %d\n", lkj[25], a, b;  
+				(byethere, ENDPROCEDURE, -, -)
+-------------------LOCAL SYMBOL TABLE-----------------------------
+| Identifier  |   Type    |   Shape  |  Rows |  Cols | Call Type |
+------------------------------------------------------------------
+|    byethere | PROCEDURE |        - |     - |     - |         - |
+|           a |      real |   SCALAR |     1 |     - |       val |
+|           k |      real |   VECTOR |   125 |     - |       ref |
+|         tre |      real |   MATRIX |   235 |   543 |       val |
+------------------------------------------------------------------
+Input Line:     WHILE (j > 20) DO
+Input Line:       WHILE ( 3*i < j+1) DO
+Input Line:         IF (b==c) THEN
+Input Line:           lkj[a:b] <- lkj[a:b]*a/b;
+Input Line:           CALL hithere{VALUE a, REFERENCE b};
+Input Line:           tre[f[a:j<-j+1]] <- lkj[a:b];
+Input Line:         END;
+Input Line:       END;
+Input Line:     END;
+Input Line:   END
+Input Line: 
+Input Line: END
+Input Line: 
+				(test, PROGRAMEND, -, -)
+-------------------GLOBAL SYMBOL TABLE----------------
+| Identifier  |   Type    |   Shape  |  Rows |  Cols |
+------------------------------------------------------
+|        test |   PROGRAM |          |       |       | 
+|           x |       int |   SCALAR |     1 |     - | 
+|           i |       int |   SCALAR |     1 |     - | 
+|           k |       int |   SCALAR |     1 |     - | 
+|           l |       int |   SCALAR |     1 |     - | 
+|           j |       int |   SCALAR |     1 |     - | 
+|           a |      real |   VECTOR |    75 |     - | 
+|           b |      real |   VECTOR |    75 |     - | 
+|           c |       int |   MATRIX |   100 |    25 | 
+|           d |       int |   MATRIX |   100 |    25 | 
+|           g |       int |   MATRIX |   100 |    25 | 
+|           h |       int |   MATRIX |   100 |    25 | 
+|           f |      real |   MATRIX |    50 |    60 | 
+|        help |      real |   SCALAR |     1 |     - | 
+|     hithere | PROCEDURE |        - |     - |     - | 
+|    byethere | PROCEDURE |        - |     - |     - | 
+------------------------------------------------------
+Succesful parse
+Go have a beer!

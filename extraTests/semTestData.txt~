@@ -1,0 +1,60 @@
+##+0##
+/*  This program should not contains any errors */
+PROGRAM test
+  DECLARE
+      INTEGER x;
+      INTEGER i;
+      INTEGER j;
+      REAL a 125 ;
+      INTEGER c 100 :: 25 ;
+      INTEGER d 100 :: 25 ;
+      INTEGER b 235 :: 543;
+      REAL f 50 :: 60 ;
+      INTEGER lkj 100 ;
+      REAL help;
+  END
+
+  PROCEDURE hithere{VALUE INTEGER d, REFERENCE REAL tre 125 ,
+                    VALUE INTEGER k 235 :: 543 }
+    DECLARE
+        INTEGER a;
+        INTEGER x;
+        INTEGER i;
+        INTEGER j;
+        INTEGER hcg 75 ;
+        INTEGER def 75 ;
+    END
+
+    IF (a <= 10) THEN
+      x <- a + ( i * j ) / a ;
+    ELSE
+      ##+12 print the semantic stack before and after a reduction  ##
+      a <- - x - d * ( i / j ) ;
+      ##-12  ##
+    END;
+    OUTPUT "%d5 - %d5  %d\n", a, x, k[a:i<-i];
+  END   /* hithere */
+
+  PROCEDURE byethere{VALUE REAL a, REFERENCE REAL k 125 ,
+                     VALUE REAL tre 235 :: 543 }
+      a <- k[100] + ( k[i] * tre[1:2] ) ;
+      lkj[i] <- - a - tre[i:x] * ( x / k[i] ) ;
+      INPUT "5d,%d,%d\n", x, a, tre[x:x];
+  END   /* byethere  */
+
+  MAIN
+    OUTPUT  "%d5 - %d5 %d\n", lkj[i], x, help;
+    WHILE (i < i*3) DO
+      ##+12 print the semantic stack before and after a reduction  ##
+      WHILE ( j > 20) DO
+        IF (i==j) THEN
+          ##-12  ##
+          c[x:i] <- c[j:x]*i/j;
+          CALL hithere{VALUE i, REFERENCE x, VALUE j};
+          lkj[c[x:i]] <- lkj[x];
+        END;
+      END;
+    END;
+  END   /* MAIN  */
+
+END

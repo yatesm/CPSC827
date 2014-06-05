@@ -1,0 +1,302 @@
+
+//(recursion, PROGRAMBEGIN, , )
+
+EAX: 
+EBX: 
+ECX: 
+EDX: 
+ESI: 
+EDI: 
+Stack (Top): 
+program recursion;
+#include ( "stdlib.hhf" )
+
+//(x, MEMORY, 1, -)
+
+EAX: 
+EBX: 
+ECX: 
+EDX: 
+ESI: 
+EDI: 
+Stack (Top): 
+static
+x: dword;
+
+//(recproc, PROCEDUREBEGIN, -, -)
+
+EAX: 
+EBX: 
+ECX: 
+EDX: 
+ESI: 
+EDI: 
+Stack (Top): 
+
+//(-, BEGINFORMALPARAMETERS, -, -)
+
+EAX: 
+EBX: 
+ECX: 
+EDX: 
+ESI: 
+EDI: 
+Stack (Top): 
+
+//(x, FORMALVALUEPARAMETER, 1, -)
+
+EAX: 
+EBX: 
+ECX: 
+EDX: 
+ESI: 
+EDI: 
+Stack (Top): 
+
+//(-, ENDFORMALPARAMETERS, -, -)
+
+EAX: 
+EBX: 
+ECX: 
+EDX: 
+ESI: 
+EDI: 
+Stack (Top): 
+procedure recproc( val x: int32) ;
+
+//(-, CALL, PRINTF, -)
+
+EAX: 
+EBX: 
+ECX: 
+EDX: 
+ESI: 
+EDI: 
+Stack (Top): 
+begin recproc;
+
+//(-, BEGINOUTPUTPARAMETER,  " %d ", -)
+
+EAX: 
+EBX: 
+ECX: 
+EDX: 
+ESI: 
+EDI: 
+Stack (Top): 
+stdout.put("  ");
+
+//(-, OUTPUTPARAMETER, x, 1)
+
+EAX: 
+EBX: 
+ECX: 
+EDX: 
+ESI: 
+EDI: 
+Stack (Top): 
+stdout.puti32Size(x, 1, ' ');
+
+//(-, ENDOUTPUTPARAMETER, -, -)
+
+EAX: 
+EBX: 
+ECX: 
+EDX: 
+ESI: 
+EDI: 
+Stack (Top): 
+
+//(B$0, ILESS, x, 10)
+
+EAX: 
+EBX: 
+ECX: 
+EDX: 
+ESI: 
+EDI: 
+Stack (Top): 
+cmp( x, 10 );
+
+//(L$0, CJUMPF, B$0, -)
+
+EAX: 
+EBX: 
+ECX: 
+EDX: 
+ESI: 
+EDI: 
+Stack (Top): 
+jge L0;
+
+//(I$0, IADD, x, 1)
+
+EAX: 
+EBX: 
+ECX: 
+EDX: 
+ESI: 
+EDI: 
+Stack (Top): 
+mov( x, EAX );
+add( 1, EAX );
+
+//(x, SUBSTORE, I$0, -)
+
+EAX: I$0
+EBX: 
+ECX: 
+EDX: 
+ESI: 
+EDI: 
+Stack (Top): 
+mov( EAX, x );
+
+//(recproc, PROCCALL, -, -)
+
+EAX: I$0
+EBX: 
+ECX: 
+EDX: 
+ESI: 
+EDI: 
+Stack (Top): 
+
+//(-, BEGINACTUALPARAMETERLIST, -, -)
+
+EAX: I$0
+EBX: 
+ECX: 
+EDX: 
+ESI: 
+EDI: 
+Stack (Top): 
+
+//(-, ACTUALVALUEPARAMETER, x, 1)
+
+EAX: I$0
+EBX: 
+ECX: 
+EDX: 
+ESI: 
+EDI: 
+Stack (Top): 
+
+//(-, ENDACTUALPARAMETERS, -, -)
+
+EAX: I$0
+EBX: 
+ECX: 
+EDX: 
+ESI: 
+EDI: 
+Stack (Top): 
+recproc(x) ;
+
+//(L$0, LABEL, -, -)
+
+EAX: I$0
+EBX: 
+ECX: 
+EDX: 
+ESI: 
+EDI: 
+Stack (Top): 
+L0:
+
+//(recproc, ENDPROCEDURE, -, -)
+
+EAX: 
+EBX: 
+ECX: 
+EDX: 
+ESI: 
+EDI: 
+Stack (Top): 
+end recproc;
+
+//(MAIN, LABEL, -, -)
+
+EAX: 
+EBX: 
+ECX: 
+EDX: 
+ESI: 
+EDI: 
+Stack (Top): 
+begin recursion;
+MAIN:
+
+//(x, SUBSTORE, 0, -)
+
+EAX: 
+EBX: 
+ECX: 
+EDX: 
+ESI: 
+EDI: 
+Stack (Top): 
+mov( 0, x );
+
+//(recproc, PROCCALL, -, -)
+
+EAX: 
+EBX: 
+ECX: 
+EDX: 
+ESI: 
+EDI: 
+Stack (Top): 
+
+//(-, BEGINACTUALPARAMETERLIST, -, -)
+
+EAX: 
+EBX: 
+ECX: 
+EDX: 
+ESI: 
+EDI: 
+Stack (Top): 
+
+//(-, ACTUALVALUEPARAMETER, x, 1)
+
+EAX: 
+EBX: 
+ECX: 
+EDX: 
+ESI: 
+EDI: 
+Stack (Top): 
+
+//(-, ENDACTUALPARAMETERS, -, -)
+
+EAX: 
+EBX: 
+ECX: 
+EDX: 
+ESI: 
+EDI: 
+Stack (Top): 
+recproc(x) ;
+
+//(-, ENDOFCALCULATIONS, -, -)
+
+EAX: 
+EBX: 
+ECX: 
+EDX: 
+ESI: 
+EDI: 
+Stack (Top): 
+
+//(recursion, PROGRAMEND, -, -)
+
+EAX: 
+EBX: 
+ECX: 
+EDX: 
+ESI: 
+EDI: 
+Stack (Top): 
+stdout.put(nl);
+end recursion;

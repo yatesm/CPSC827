@@ -1,0 +1,32 @@
+Name: Yates Monteith and Anthony McDougal
+Email JYMONTE@Clemson.edu, MCOUDGL@Clemson.edu
+Timestamp Fri Apr 29 06:12:19 2011
+
+				(spillage, PROGRAMBEGIN, , )
+				(x, MEMORY, 1, -)
+				(MAIN, LABEL, -, -)
+				(I$0, IADD, 1, 2)
+				(I$1, IADD, 1, 2)
+				(I$2, IADD, I$0, I$1)
+				(I$3, IADD, 3, 4)
+				(I$4, IADD, 5, 6)
+				(I$5, IADD, 7, 8)
+				(I$6, IADD, 9, 10)
+				(I$7, IADD, 11, 12)
+				(I$8, IADD, 13, 14)
+				(I$9, IADD, I$7, I$8)
+				(I$10, IADD, I$6, I$9)
+				(I$11, IADD, I$5, I$10)
+				(I$12, IADD, I$4, I$11)
+				(I$13, IADD, I$3, I$12)
+				(I$14, IADD, I$2, I$13)
+				(x, SUBSTORE, I$14, -)
+				(-, CALL, PRINTF, -)
+				(-, BEGINOUTPUTPARAMETER,  "%d", -)
+				(-, OUTPUTPARAMETER, x, 1)
+				(-, ENDOUTPUTPARAMETER, -, -)
+				(-, ENDOFCALCULATIONS, -, -)
+				(spillage, PROGRAMEND, -, -)
+Succesful parse
+Go have a beer!
+Something has gone wrong

@@ -1,0 +1,985 @@
+
+Grammar Analysis (v2.3) -- CLEMSON UNIVERSITY -- Today Is Tue Feb 8 2011 at 01:30:24
+
+
+                    P R O D U C T I O N S
+
+
+
+	$
+	$      CPSC 827 Simple Precedence Grammar for Spring 2011
+	$
+
+     1.  start  -->  prog  body  END  
+
+     2.  prog  -->  PROGRAM  var  
+
+     3.  body  -->  declpart  procpart  execpart  
+     4.             declpart  execpart  
+	$
+	$     Declarations
+	$
+	$    Do you want to declare procedures???
+	$
+
+     5.  declpart  -->  DECLARE  decllist  END  
+
+     6.  decllist  -->  decllist-  
+
+     7.  decllist-  -->  decllist-  declstat  ;  
+     8.                  declstat  ;  
+
+     9.  declstat  -->  declstat-  
+
+    10.  declstat-  -->  declstat-  ,  var  
+    11.                  declstat-  ,  var  =  constant  
+    12.                  type  var  
+    13.                  type  var  =  constant  
+    14.                  type  var  integer  
+    15.                  type  var  integer  ::  integer  
+
+    16.  type  -->  INTEGER  
+    17.             REAL  
+	$
+	$     Procedures
+	$
+
+    18.  procpart  -->  proclist  
+
+    19.  proclist  -->  proclist  proc  
+    20.                 proc  
+
+    21.  proc  -->  prochead  declpart  statlist  END  
+    22.             prochead  statlist  END  
+
+    23.  prochead  -->  procname  null-list  
+    24.                 procname  fparmlist  }  
+
+    25.  procname  -->  PROCEDURE  var  
+
+    26.  null-list  -->  {  }  
+
+    27.  fparmlist  -->  fparmlist-  
+
+    28.  fparmlist-  -->  fparmlist-  ,  calltype  type  var  
+    29.                   fparmlist-  ,  calltype  type  var  integer  
+    30.                   fparmlist-  ,  calltype  type  var  integer  ::  integer  
+    31.                   {  calltype  type  var  
+    32.                   {  calltype  type  var  integer  
+    33.                   {  calltype  type  var  integer  ::  integer  
+
+    34.  calltype  -->  VALUE  
+    35.                 REFERENCE  
+	$
+	$     Executable Part
+	$
+
+    36.  execpart  -->  exechead  statlist  END  
+
+    37.  exechead  -->  MAIN  
+
+    38.  statlist  -->  statlist-  
+
+    39.  statlist-  -->  statlist-  stat  
+    40.                  stat  
+
+    41.  stat  -->  whilestat  ;  
+    42.             ifstat  ;  
+    43.             assignstat  
+    44.             inputstat-  ;  
+    45.             outputstat-  ;  
+    46.             callstat  ;  
+	$
+
+    47.  inputstat-  -->  inputstat  
+
+    48.  inputstat  -->  inputstat  ,  var  
+    49.                  inputstat  ,  var  [  astat  ]  
+    50.                  inputstat  ,  var  [  astat  :  astat  ]  
+    51.                  INPUT  string  ,  var  
+    52.                  INPUT  string  ,  var  [  astat  ]  
+    53.                  INPUT  string  ,  var  [  astat  :  astat  ]  
+	$
+
+    54.  outputstat-  -->  outputstat  
+
+    55.  outputstat  -->  outputstat  ,  var  
+    56.                   outputstat  ,  var  [  astat  ]  
+    57.                   outputstat  ,  var  [  astat  :  astat  ]  
+    58.                   OUTPUT  string  ,  var  
+    59.                   OUTPUT  string  ,  var  [  astat  ]  
+    60.                   OUTPUT  string  ,  var  [  astat  :  astat  ]  
+	$
+
+    61.  callstat  -->  callname  null-list  
+    62.                 callname  aparmlist  }  
+
+    63.  callname  -->  CALL  var  
+
+    64.  aparmlist  -->  aparmlist-  
+
+    65.  aparmlist-  -->  aparmlist-  ,  calltype  var  
+    66.                   aparmlist-  ,  calltype  var  [  astat  ]  
+    67.                   aparmlist-  ,  calltype  var  [  astat  :  astat  ]  
+    68.                   {  calltype  var  
+    69.                   {  calltype  var  [  astat  ]  
+    70.                   {  calltype  var  [  astat  :  astat  ]  
+	$
+
+    71.  ifstat  -->  ifhead  statlist  END  
+    72.               ifthen  statlist  END  
+
+    73.  ifthen  -->  ifhead  statlist  ELSE  
+
+    74.  ifhead  -->  IF  (  bexpr  )  THEN  
+	$
+
+    75.  whilestat  -->  whilecond  statlist  END  
+
+    76.  whilecond  -->  whilehead  (  bexpr  )  DO  
+
+    77.  whilehead  -->  WHILE  
+	$
+
+    78.  assignstat  -->  astat  ;  
+
+    79.  astat  -->  var  <-  aexpr  
+    80.              var  [  astat  ]  <-  aexpr  
+    81.              var  [  astat  :  astat  ]  <-  aexpr  
+    82.              bexpr  
+
+    83.  bexpr  -->  bexpr-  
+
+    84.  bexpr-  -->  bexpr-  ||  andexpr  
+    85.               andexpr  
+
+    86.  andexpr  -->  andexpr-  
+
+    87.  andexpr-  -->  andexpr-  &&  notexpr  
+    88.                 notexpr  
+
+    89.  notexpr  -->  notexpr-  
+
+    90.  notexpr-  -->  !  relexpr  
+    91.                 relexpr  
+
+    92.  relexpr  -->  relexpr-  
+
+    93.  relexpr-  -->  aexpr  <  aexpr  
+    94.                 aexpr  <=  aexpr  
+    95.                 aexpr  >  aexpr  
+    96.                 aexpr  >=  aexpr  
+    97.                 aexpr  ==  aexpr  
+    98.                 aexpr  !=  aexpr  
+    99.                 aexpr  
+
+   100.  aexpr  -->  aexpr-  
+
+   101.  aexpr-  -->  aexpr-  +  term  
+   102.               aexpr-  -  term  
+   103.               -  term  
+   104.               term  
+
+   105.  term  -->  term-  
+
+   106.  term-  -->  term-  *  primary  
+   107.              term-  /  primary  
+   108.              primary  
+
+   109.  primary  -->  primary-  
+
+   110.  primary-  -->  (  bexpr  )  
+   111.                 var  [  astat  :  astat  ]  
+   112.                 var  [  astat  ]  
+   113.                 var  
+   114.                 constant  
+
+   115.  constant  -->  integer  
+   116.                 real  
+	$sp
+	$spfile
+	$floyd
+	$pffile
+
+
+
+
+
+GRAMMAR SYMBOLS . . . . . . . . . .
+
+
+	NONTERMINALS			TERMINALS
+
+
+	1	start			55	END
+	2	prog			56	PROGRAM
+	3	body			57	var
+	4	declpart		58	DECLARE
+	5	decllist		59	;
+	6	decllist-		60	,
+	7	declstat		61	=
+	8	declstat-		62	integer
+	9	type			63	::
+	10	procpart		64	INTEGER
+	11	proclist		65	REAL
+	12	proc			66	}
+	13	prochead		67	PROCEDURE
+	14	procname		68	{
+	15	null-list		69	VALUE
+	16	fparmlist		70	REFERENCE
+	17	fparmlist-		71	MAIN
+	18	calltype		72	[
+	19	execpart		73	]
+	20	exechead		74	:
+	21	statlist		75	INPUT
+	22	statlist-		76	string
+	23	stat			77	OUTPUT
+	24	inputstat-		78	CALL
+	25	inputstat		79	ELSE
+	26	outputstat-		80	IF
+	27	outputstat		81	(
+	28	callstat		82	)
+	29	callname		83	THEN
+	30	aparmlist		84	DO
+	31	aparmlist-		85	WHILE
+	32	ifstat			86	<-
+	33	ifthen			87	||
+	34	ifhead			88	&&
+	35	whilestat		89	!
+	36	whilecond		90	<
+	37	whilehead		91	<=
+	38	assignstat		92	>
+	39	astat			93	>=
+	40	bexpr			94	==
+	41	bexpr-			95	!=
+	42	andexpr			96	+
+	43	andexpr-		97	-
+	44	notexpr			98	*
+	45	notexpr-		99	/
+	46	relexpr			100	real
+	47	relexpr-
+	48	aexpr
+	49	aexpr-
+	50	term
+	51	term-
+	52	primary
+	53	primary-
+	54	constant
+
+
+
+ 
+
+
+
+
+		SIMPLE PRECEDENCE ANALYSIS
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+SIMPLE PRECEDENCE MATRIX . . . . . . . . . . .
+
+			ENTRY    =   G   L   4      5      6      7
+			MEANS    EQ  GT  LT  LT,EQ  GT,EQ  LT,GT  LT,GT,EQ
+
+
+                                                                              
+                                                                              
+                                                                              
+                                                                              
+                                                                        o     
+                                                      f             i   u o   
+                                d   d             n f p         s   n i t u   
+                            d d e d e   p p   p p u p a c e e s t   p n p t c 
+                            e e c e c   r r   r r l a r a x x t a   u p u p a 
+                            c c l c l   o o   o o l r m l e e a t   t u t u l 
+                      s     l l l l s   c c   c c - m l l c c t l   s t s t l 
+                      t p b p l i s t t p l p h n l l i t p h l i s t s t s s 
+                      a r o a i s t a y a i r e a i i s y a e i s t a t a t t 
+                      r o d r s t a t p r s o a m s s t p r a s t a t a t a a 
+                      t g y t t - t - e t t c d e t t - e t d t - t - t - t t 
+
+                                          1                   2               
+                      1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 
+   1           start  . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+   2            prog  . . = L . . . . . . . . . . . . . . . . . . . . . . . . 
+   3            body  . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+   4        declpart  . . . . . . . . . = L L L L . . . . = L = L L L L L L L 
+   5        decllist  . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+   6       decllist-  . . . . . . = L L . . . . . . . . . . . . . . . . . . . 
+   7        declstat  . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+   8       declstat-  . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+   9            type  . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+  10        procpart  . . . . . . . . . . . . . . . . . . = L . . . . . . . . 
+  11        proclist  . . . . . . . . . . . = L L . . . . G G . . . . . . . . 
+  12            proc  . . . . . . . . . . . G G G . . . . G G . . . . . . . . 
+  13        prochead  . . . = . . . . . . . . . . . . . . . . = L L L L L L L 
+  14        procname  . . . . . . . . . . . . . . = = L . . . . . . . . . . . 
+  15       null-list  . . . G . . . . . . . . . . . . . . . . G G G G G G G G 
+  16       fparmlist  . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+  17      fparmlist-  . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+  18        calltype  . . . . . . . . = . . . . . . . . . . . . . . . . . . . 
+  19        execpart  . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+  20        exechead  . . . . . . . . . . . . . . . . . . . . = L L L L L L L 
+  21        statlist  . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+  22       statlist-  . . . . . . . . . . . . . . . . . . . . . . = L L L L L 
+  23            stat  . . . . . . . . . . . . . . . . . . . . . . G G G G G G 
+  24      inputstat-  . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+  25       inputstat  . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+  26     outputstat-  . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+  27      outputstat  . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+  28        callstat  . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+  29        callname  . . . . . . . . . . . . . . = . . . . . . . . . . . . . 
+  30       aparmlist  . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+  31      aparmlist-  . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+  32          ifstat  . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+  33          ifthen  . . . . . . . . . . . . . . . . . . . . = L L L L L L L 
+  34          ifhead  . . . . . . . . . . . . . . . . . . . . = L L L L L L L 
+  35       whilestat  . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+  36       whilecond  . . . . . . . . . . . . . . . . . . . . = L L L L L L L 
+  37       whilehead  . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+  38      assignstat  . . . . . . . . . . . . . . . . . . . . . . G G G G G G 
+  39           astat  . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+  40           bexpr  . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+  41          bexpr-  . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+  42         andexpr  . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+  43        andexpr-  . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+  44         notexpr  . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+  45        notexpr-  . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+  46         relexpr  . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+  47        relexpr-  . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+  48           aexpr  . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+  49          aexpr-  . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+  50            term  . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+  51           term-  . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+  52         primary  . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+  53        primary-  . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+  54        constant  . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+  55             END  . . . . . . . . . G G G G G . . . . G G G G G G G G G G 
+  56         PROGRAM  . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+  57             var  . . G G . . . . . . . . . . G G G . . . . . . . . . . . 
+  58         DECLARE  . . . . = L L L L . . . . . . . . . . . . . . . . . . . 
+  59               ;  . . . . . . G G G . . . . . . . . . . . . . G G G G G G 
+  60               ,  . . . . . . . . . . . . . . . . . = . . . . . . . . . . 
+  61               =  . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+  62         integer  . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+  63              ::  . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+  64         INTEGER  . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+  65            REAL  . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+  66               }  . . . G . . . . . . . . . . . . . . . . G G G G G G G G 
+  67       PROCEDURE  . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+  68               {  . . . . . . . . . . . . . . . . . = . . . . . . . . . . 
+  69           VALUE  . . . . . . . . G . . . . . . . . . . . . . . . . . . . 
+  70       REFERENCE  . . . . . . . . G . . . . . . . . . . . . . . . . . . . 
+  71            MAIN  . . . . . . . . . . . . . . . . . . . . G G G G G G G G 
+  72               [  . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+  73               ]  . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+  74               :  . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+  75           INPUT  . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+  76          string  . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+  77          OUTPUT  . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+  78            CALL  . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+  79            ELSE  . . . . . . . . . . . . . . . . . . . . G G G G G G G G 
+  80              IF  . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+  81               (  . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+  82               )  . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+  83            THEN  . . . . . . . . . . . . . . . . . . . . G G G G G G G G 
+  84              DO  . . . . . . . . . . . . . . . . . . . . G G G G G G G G 
+  85           WHILE  . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+  86              <-  . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+  87              ||  . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+  88              &&  . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+  89               !  . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+  90               <  . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+  91              <=  . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+  92               >  . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+  93              >=  . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+  94              ==  . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+  95              !=  . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+  96               +  . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+  97               -  . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+  98               *  . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+  99               /  . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+ 100            real  . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+
+                                          1                   2               
+                      1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 
+
+
+
+
+
+SIMPLE PRECEDENCE MATRIX CONTINUED . . . . . .
+
+			ENTRY    =   G   L   4      5      6      7
+			MEANS    EQ  GT  LT  LT,EQ  GT,EQ  LT,GT  LT,GT,EQ
+
+
+                                                                              
+                                                                              
+                                                                              
+                                                                              
+                                                                              
+                          a             a                                     
+                        a p       w w w s                                     
+                      c p a       h h h s         a   n   r           p c     
+                      a a r       i i i i       a n n o r e         p r o   P 
+                      l r m i i i l l l g     b n d o t e l   a     r i n   R 
+                      l m l f f f e e e n a b e d e t e l e a e   t i m s   O 
+                      n l i s t h s c h s s e x e x e x e x e x t e m a t   G 
+                      a i s t h e t o e t t x p x p x p x p x p e r a r a E R 
+                      m s t a e a a n a a a p r p r p r p r p r r m r y n N A 
+                      e t - t n d t d d t t r - r - r - r - r - m - y - t D M 
+
+                          3                   4                   5           
+                      9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 
+   1           start  . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+   2            prog  . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+   3            body  . . . . . . . . . . . . . . . . . . . . . . . . . . = . 
+   4        declpart  L . . L L L L L L L L L L L L L L L L L L L L L L L . . 
+   5        decllist  . . . . . . . . . . . . . . . . . . . . . . . . . . = . 
+   6       decllist-  . . . . . . . . . . . . . . . . . . . . . . . . . . G . 
+   7        declstat  . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+   8       declstat-  . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+   9            type  . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+  10        procpart  . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+  11        proclist  . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+  12            proc  . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+  13        prochead  L . . L L L L L L L L L L L L L L L L L L L L L L L . . 
+  14        procname  . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+  15       null-list  G . . G G G G G G G G G G G G G G G G G G G G G G G . . 
+  16       fparmlist  . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+  17      fparmlist-  . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+  18        calltype  . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+  19        execpart  . . . . . . . . . . . . . . . . . . . . . . . . . . G . 
+  20        exechead  L . . L L L L L L L L L L L L L L L L L L L L L L L . . 
+  21        statlist  . . . . . . . . . . . . . . . . . . . . . . . . . . = . 
+  22       statlist-  L . . L L L L L L L L L L L L L L L L L L L L L L L G . 
+  23            stat  G . . G G G G G G G G G G G G G G G G G G G G G G G G . 
+  24      inputstat-  . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+  25       inputstat  . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+  26     outputstat-  . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+  27      outputstat  . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+  28        callstat  . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+  29        callname  . = L . . . . . . . . . . . . . . . . . . . . . . . . . 
+  30       aparmlist  . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+  31      aparmlist-  . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+  32          ifstat  . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+  33          ifthen  L . . L L L L L L L L L L L L L L L L L L L L L L L . . 
+  34          ifhead  L . . L L L L L L L L L L L L L L L L L L L L L L L . . 
+  35       whilestat  . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+  36       whilecond  L . . L L L L L L L L L L L L L L L L L L L L L L L . . 
+  37       whilehead  . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+  38      assignstat  G . . G G G G G G G G G G G G G G G G G G G G G G G G . 
+  39           astat  . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+  40           bexpr  . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+  41          bexpr-  . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+  42         andexpr  . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+  43        andexpr-  . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+  44         notexpr  . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+  45        notexpr-  . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+  46         relexpr  . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+  47        relexpr-  . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+  48           aexpr  . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+  49          aexpr-  . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+  50            term  . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+  51           term-  . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+  52         primary  . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+  53        primary-  . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+  54        constant  . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+  55             END  G . . G G G G G G G G G G G G G G G G G G G G G G G G . 
+  56         PROGRAM  . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+  57             var  . G G . . . . . . . . . . . . . . . . . . . . . . . . . 
+  58         DECLARE  . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+  59               ;  G . . G G G G G G G G G G G G G G G G G G G G G G G G . 
+  60               ,  . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+  61               =  . . . . . . . . . . . . . . . . . . . . . . . . . = . . 
+  62         integer  . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+  63              ::  . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+  64         INTEGER  . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+  65            REAL  . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+  66               }  G . . G G G G G G G G G G G G G G G G G G G G G G G . . 
+  67       PROCEDURE  . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+  68               {  . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+  69           VALUE  . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+  70       REFERENCE  . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+  71            MAIN  G . . G G G G G G G G G G G G G G G G G G G G G G G . . 
+  72               [  . . . . . . . . . . = L L L L L L L L L L L L L L L . . 
+  73               ]  . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+  74               :  . . . . . . . . . . = L L L L L L L L L L L L L L L . . 
+  75           INPUT  . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+  76          string  . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+  77          OUTPUT  . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+  78            CALL  . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+  79            ELSE  G . . G G G G G G G G G G G G G G G G G G G G G G G . . 
+  80              IF  . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+  81               (  . . . . . . . . . . . = L L L L L L L L L L L L L L . . 
+  82               )  . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+  83            THEN  G . . G G G G G G G G G G G G G G G G G G G G G G G . . 
+  84              DO  G . . G G G G G G G G G G G G G G G G G G G G G G G . . 
+  85           WHILE  . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+  86              <-  . . . . . . . . . . . . . . . . . . . = L L L L L L . . 
+  87              ||  . . . . . . . . . . . . . = L L L L L L L L L L L L . . 
+  88              &&  . . . . . . . . . . . . . . . = L L L L L L L L L L . . 
+  89               !  . . . . . . . . . . . . . . . . . = L L L L L L L L . . 
+  90               <  . . . . . . . . . . . . . . . . . . . = L L L L L L . . 
+  91              <=  . . . . . . . . . . . . . . . . . . . = L L L L L L . . 
+  92               >  . . . . . . . . . . . . . . . . . . . = L L L L L L . . 
+  93              >=  . . . . . . . . . . . . . . . . . . . = L L L L L L . . 
+  94              ==  . . . . . . . . . . . . . . . . . . . = L L L L L L . . 
+  95              !=  . . . . . . . . . . . . . . . . . . . = L L L L L L . . 
+  96               +  . . . . . . . . . . . . . . . . . . . . . = L L L L . . 
+  97               -  . . . . . . . . . . . . . . . . . . . . . = L L L L . . 
+  98               *  . . . . . . . . . . . . . . . . . . . . . . . = L L . . 
+  99               /  . . . . . . . . . . . . . . . . . . . . . . . = L L . . 
+ 100            real  . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+
+                          3                   4                   5           
+                      9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 
+
+
+
+
+
+SIMPLE PRECEDENCE MATRIX CONTINUED . . . . . .
+
+			ENTRY    =   G   L   4      5      6      7
+			MEANS    EQ  GT  LT  LT,EQ  GT,EQ  LT,GT  LT,GT,EQ
+
+
+                                                                              
+                                                                              
+                                                                              
+                                                                              
+                                                                              
+                                                                              
+                                          P     R                             
+                                          R     E                             
+                        D       i   I     O     F                             
+                        E       n   N     C     E           s O               
+                        C       t   T     E   V R         I t U               
+                        L       e   E R   D   A E M       N r T C E       T   
+                      v A       g   G E   U   L N A       P i P A L       H   
+                      a R       e : E A   R   U C I       U n U L S I     E D 
+                      r E ; , = r : R L } E { E E N [ ] : T g T L E F ( ) N O 
+
+                              6                   7                   8       
+                      7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 
+   1           start  . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+   2            prog  . L . . . . . . . . . . . . . . . . . . . . . . . . . . 
+   3            body  . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+   4        declpart  L . . . . L . . . . L . . . L . . . L . L L . L L . . . 
+   5        decllist  . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+   6       decllist-  . . . . . . . L L . . . . . . . . . . . . . . . . . . . 
+   7        declstat  . . = . . . . . . . . . . . . . . . . . . . . . . . . . 
+   8       declstat-  . . G = . . . . . . . . . . . . . . . . . . . . . . . . 
+   9            type  = . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+  10        procpart  . . . . . . . . . . . . . . L . . . . . . . . . . . . . 
+  11        proclist  . . . . . . . . . . L . . . G . . . . . . . . . . . . . 
+  12            proc  . . . . . . . . . . G . . . G . . . . . . . . . . . . . 
+  13        prochead  L L . . . L . . . . . . . . . . . . L . L L . L L . . . 
+  14        procname  . . . . . . . . . . . L . . . . . . . . . . . . . . . . 
+  15       null-list  G G G . . G . . . . . . . . . . . . G . G G . G G . . . 
+  16       fparmlist  . . . . . . . . . = . . . . . . . . . . . . . . . . . . 
+  17      fparmlist-  . . . = . . . . . G . . . . . . . . . . . . . . . . . . 
+  18        calltype  = . . . . . . L L . . . . . . . . . . . . . . . . . . . 
+  19        execpart  . . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+  20        exechead  L . . . . L . . . . . . . . . . . . L . L L . L L . . . 
+  21        statlist  . . . . . . . . . . . . . . . . . . . . . . = . . . . . 
+  22       statlist-  L . . . . L . . . . . . . . . . . . L . L L G L L . . . 
+  23            stat  G . . . . G . . . . . . . . . . . . G . G G G G G . . . 
+  24      inputstat-  . . = . . . . . . . . . . . . . . . . . . . . . . . . . 
+  25       inputstat  . . G = . . . . . . . . . . . . . . . . . . . . . . . . 
+  26     outputstat-  . . = . . . . . . . . . . . . . . . . . . . . . . . . . 
+  27      outputstat  . . G = . . . . . . . . . . . . . . . . . . . . . . . . 
+  28        callstat  . . = . . . . . . . . . . . . . . . . . . . . . . . . . 
+  29        callname  . . . . . . . . . . . L . . . . . . . . . . . . . . . . 
+  30       aparmlist  . . . . . . . . . = . . . . . . . . . . . . . . . . . . 
+  31      aparmlist-  . . . = . . . . . G . . . . . . . . . . . . . . . . . . 
+  32          ifstat  . . = . . . . . . . . . . . . . . . . . . . . . . . . . 
+  33          ifthen  L . . . . L . . . . . . . . . . . . L . L L . L L . . . 
+  34          ifhead  L . . . . L . . . . . . . . . . . . L . L L . L L . . . 
+  35       whilestat  . . = . . . . . . . . . . . . . . . . . . . . . . . . . 
+  36       whilecond  L . . . . L . . . . . . . . . . . . L . L L . L L . . . 
+  37       whilehead  . . . . . . . . . . . . . . . . . . . . . . . . = . . . 
+  38      assignstat  G . . . . G . . . . . . . . . . . . G . G G G G G . . . 
+  39           astat  . . = . . . . . . . . . . . . . = = . . . . . . . . . . 
+  40           bexpr  . . G . . . . . . . . . . . . . G G . . . . . . . = . . 
+  41          bexpr-  . . G . . . . . . . . . . . . . G G . . . . . . . G . . 
+  42         andexpr  . . G . . . . . . . . . . . . . G G . . . . . . . G . . 
+  43        andexpr-  . . G . . . . . . . . . . . . . G G . . . . . . . G . . 
+  44         notexpr  . . G . . . . . . . . . . . . . G G . . . . . . . G . . 
+  45        notexpr-  . . G . . . . . . . . . . . . . G G . . . . . . . G . . 
+  46         relexpr  . . G . . . . . . . . . . . . . G G . . . . . . . G . . 
+  47        relexpr-  . . G . . . . . . . . . . . . . G G . . . . . . . G . . 
+  48           aexpr  . . G . . . . . . . . . . . . . G G . . . . . . . G . . 
+  49          aexpr-  . . G . . . . . . . . . . . . . G G . . . . . . . G . . 
+  50            term  . . G . . . . . . . . . . . . . G G . . . . . . . G . . 
+  51           term-  . . G . . . . . . . . . . . . . G G . . . . . . . G . . 
+  52         primary  . . G . . . . . . . . . . . . . G G . . . . . . . G . . 
+  53        primary-  . . G . . . . . . . . . . . . . G G . . . . . . . G . . 
+  54        constant  . . G G . . . . . . . . . . . . G G . . . . . . . G . . 
+  55             END  G . G . . G . . . . G . . . G . . . G . G G . G G . . . 
+  56         PROGRAM  = . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+  57             var  . G G G = = . . . G . G . . . = G G . . . . . . . G . . 
+  58         DECLARE  . . . . . . . L L . . . . . . . . . . . . . . . . . . . 
+  59               ;  G . . . . G . G G . . . . . . . . . G . G G G G G . . . 
+  60               ,  = . . . . . . . . . . . L L . . . . . . . . . . . . . . 
+  61               =  . . . . . L . . . . . . . . . . . . . . . . . . . . . . 
+  62         integer  . . G G . . = . . G . . . . . . G G . . . . . . . G . . 
+  63              ::  . . . . . = . . . . . . . . . . . . . . . . . . . . . . 
+  64         INTEGER  G . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+  65            REAL  G . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+  66               }  G G G . . G . . . . . . . . . . . . G . G G . G G . . . 
+  67       PROCEDURE  = . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+  68               {  . . . . . . . . . = . . L L . . . . . . . . . . . . . . 
+  69           VALUE  G . . . . . . G G . . . . . . . . . . . . . . . . . . . 
+  70       REFERENCE  G . . . . . . G G . . . . . . . . . . . . . . . . . . . 
+  71            MAIN  G . . . . G . . . . . . . . . . . . G . G G . G G . . . 
+  72               [  L . . . . L . . . . . . . . . . . . . . . . . . L . . . 
+  73               ]  . . G G . . . . . G . . . . . . G G . . . . . . . G . . 
+  74               :  L . . . . L . . . . . . . . . . . . . . . . . . L . . . 
+  75           INPUT  . . . . . . . . . . . . . . . . . . . = . . . . . . . . 
+  76          string  . . . = . . . . . . . . . . . . . . . . . . . . . . . . 
+  77          OUTPUT  . . . . . . . . . . . . . . . . . . . = . . . . . . . . 
+  78            CALL  = . . . . . . . . . . . . . . . . . . . . . . . . . . . 
+  79            ELSE  G . . . . G . . . . . . . . . . . . G . G G . G G . . . 
+  80              IF  . . . . . . . . . . . . . . . . . . . . . . . . = . . . 
+  81               (  L . . . . L . . . . . . . . . . . . . . . . . . L . . . 
+  82               )  . . G . . . . . . . . . . . . . G G . . . . . . . G = = 
+  83            THEN  G . . . . G . . . . . . . . . . . . G . G G . G G . . . 
+  84              DO  G . . . . G . . . . . . . . . . . . G . G G . G G . . . 
+  85           WHILE  . . . . . . . . . . . . . . . . . . . . . . . . G . . . 
+  86              <-  L . . . . L . . . . . . . . . . . . . . . . . . L . . . 
+  87              ||  L . . . . L . . . . . . . . . . . . . . . . . . L . . . 
+  88              &&  L . . . . L . . . . . . . . . . . . . . . . . . L . . . 
+  89               !  L . . . . L . . . . . . . . . . . . . . . . . . L . . . 
+  90               <  L . . . . L . . . . . . . . . . . . . . . . . . L . . . 
+  91              <=  L . . . . L . . . . . . . . . . . . . . . . . . L . . . 
+  92               >  L . . . . L . . . . . . . . . . . . . . . . . . L . . . 
+  93              >=  L . . . . L . . . . . . . . . . . . . . . . . . L . . . 
+  94              ==  L . . . . L . . . . . . . . . . . . . . . . . . L . . . 
+  95              !=  L . . . . L . . . . . . . . . . . . . . . . . . L . . . 
+  96               +  L . . . . L . . . . . . . . . . . . . . . . . . L . . . 
+  97               -  L . . . . L . . . . . . . . . . . . . . . . . . L . . . 
+  98               *  L . . . . L . . . . . . . . . . . . . . . . . . L . . . 
+  99               /  L . . . . L . . . . . . . . . . . . . . . . . . L . . . 
+ 100            real  . . G G . . . . . . . . . . . . G G . . . . . . . G . . 
+
+                              6                   7                   8       
+                      7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 
+
+
+
+
+
+SIMPLE PRECEDENCE MATRIX CONTINUED . . . . . .
+
+			ENTRY    =   G   L   4      5      6      7
+			MEANS    EQ  GT  LT  LT,EQ  GT,EQ  LT,GT  LT,GT,EQ
+
+
+                                                      
+                                                      
+                                                      
+                                                      
+                                                      
+                                                      
+                                                      
+                                                      
+                                                      
+                                                      
+                      W                               
+                      H                             r 
+                      I                             e 
+                      L < | &     <   > = !         a 
+                      E - | & ! < = > = = = + - * / l 
+
+                                  9                   
+                      5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 
+   1           start  . . . . . . . . . . . . . . . . 
+   2            prog  . . . . . . . . . . . . . . . . 
+   3            body  . . . . . . . . . . . . . . . . 
+   4        declpart  L . . . L . . . . . . . L . . L 
+   5        decllist  . . . . . . . . . . . . . . . . 
+   6       decllist-  . . . . . . . . . . . . . . . . 
+   7        declstat  . . . . . . . . . . . . . . . . 
+   8       declstat-  . . . . . . . . . . . . . . . . 
+   9            type  . . . . . . . . . . . . . . . . 
+  10        procpart  . . . . . . . . . . . . . . . . 
+  11        proclist  . . . . . . . . . . . . . . . . 
+  12            proc  . . . . . . . . . . . . . . . . 
+  13        prochead  L . . . L . . . . . . . L . . L 
+  14        procname  . . . . . . . . . . . . . . . . 
+  15       null-list  G . . . G . . . . . . . G . . G 
+  16       fparmlist  . . . . . . . . . . . . . . . . 
+  17      fparmlist-  . . . . . . . . . . . . . . . . 
+  18        calltype  . . . . . . . . . . . . . . . . 
+  19        execpart  . . . . . . . . . . . . . . . . 
+  20        exechead  L . . . L . . . . . . . L . . L 
+  21        statlist  . . . . . . . . . . . . . . . . 
+  22       statlist-  L . . . L . . . . . . . L . . L 
+  23            stat  G . . . G . . . . . . . G . . G 
+  24      inputstat-  . . . . . . . . . . . . . . . . 
+  25       inputstat  . . . . . . . . . . . . . . . . 
+  26     outputstat-  . . . . . . . . . . . . . . . . 
+  27      outputstat  . . . . . . . . . . . . . . . . 
+  28        callstat  . . . . . . . . . . . . . . . . 
+  29        callname  . . . . . . . . . . . . . . . . 
+  30       aparmlist  . . . . . . . . . . . . . . . . 
+  31      aparmlist-  . . . . . . . . . . . . . . . . 
+  32          ifstat  . . . . . . . . . . . . . . . . 
+  33          ifthen  L . . . L . . . . . . . L . . L 
+  34          ifhead  L . . . L . . . . . . . L . . L 
+  35       whilestat  . . . . . . . . . . . . . . . . 
+  36       whilecond  L . . . L . . . . . . . L . . L 
+  37       whilehead  . . . . . . . . . . . . . . . . 
+  38      assignstat  G . . . G . . . . . . . G . . G 
+  39           astat  . . . . . . . . . . . . . . . . 
+  40           bexpr  . . . . . . . . . . . . . . . . 
+  41          bexpr-  . . = . . . . . . . . . . . . . 
+  42         andexpr  . . G . . . . . . . . . . . . . 
+  43        andexpr-  . . G = . . . . . . . . . . . . 
+  44         notexpr  . . G G . . . . . . . . . . . . 
+  45        notexpr-  . . G G . . . . . . . . . . . . 
+  46         relexpr  . . G G . . . . . . . . . . . . 
+  47        relexpr-  . . G G . . . . . . . . . . . . 
+  48           aexpr  . . G G . = = = = = = . . . . . 
+  49          aexpr-  . . G G . G G G G G G = = . . . 
+  50            term  . . G G . G G G G G G G G . . . 
+  51           term-  . . G G . G G G G G G G G = = . 
+  52         primary  . . G G . G G G G G G G G G G . 
+  53        primary-  . . G G . G G G G G G G G G G . 
+  54        constant  . . G G . G G G G G G G G G G . 
+  55             END  G . . . G . . . . . . . G . . G 
+  56         PROGRAM  . . . . . . . . . . . . . . . . 
+  57             var  . = G G . G G G G G G G G G G . 
+  58         DECLARE  . . . . . . . . . . . . . . . . 
+  59               ;  G . . . G . . . . . . . G . . G 
+  60               ,  . . . . . . . . . . . . . . . . 
+  61               =  . . . . . . . . . . . . . . . L 
+  62         integer  . . G G . G G G G G G G G G G . 
+  63              ::  . . . . . . . . . . . . . . . . 
+  64         INTEGER  . . . . . . . . . . . . . . . . 
+  65            REAL  . . . . . . . . . . . . . . . . 
+  66               }  G . . . G . . . . . . . G . . G 
+  67       PROCEDURE  . . . . . . . . . . . . . . . . 
+  68               {  . . . . . . . . . . . . . . . . 
+  69           VALUE  . . . . . . . . . . . . . . . . 
+  70       REFERENCE  . . . . . . . . . . . . . . . . 
+  71            MAIN  G . . . G . . . . . . . G . . G 
+  72               [  . . . . L . . . . . . . L . . L 
+  73               ]  . = G G . G G G G G G G G G G . 
+  74               :  . . . . L . . . . . . . L . . L 
+  75           INPUT  . . . . . . . . . . . . . . . . 
+  76          string  . . . . . . . . . . . . . . . . 
+  77          OUTPUT  . . . . . . . . . . . . . . . . 
+  78            CALL  . . . . . . . . . . . . . . . . 
+  79            ELSE  G . . . G . . . . . . . G . . G 
+  80              IF  . . . . . . . . . . . . . . . . 
+  81               (  . . . . L . . . . . . . L . . L 
+  82               )  . . G G . G G G G G G G G G G . 
+  83            THEN  G . . . G . . . . . . . G . . G 
+  84              DO  G . . . G . . . . . . . G . . G 
+  85           WHILE  . . . . . . . . . . . . . . . . 
+  86              <-  . . . . . . . . . . . . L . . L 
+  87              ||  . . . . L . . . . . . . L . . L 
+  88              &&  . . . . L . . . . . . . L . . L 
+  89               !  . . . . . . . . . . . . L . . L 
+  90               <  . . . . . . . . . . . . L . . L 
+  91              <=  . . . . . . . . . . . . L . . L 
+  92               >  . . . . . . . . . . . . L . . L 
+  93              >=  . . . . . . . . . . . . L . . L 
+  94              ==  . . . . . . . . . . . . L . . L 
+  95              !=  . . . . . . . . . . . . L . . L 
+  96               +  . . . . . . . . . . . . . . . L 
+  97               -  . . . . . . . . . . . . . . . L 
+  98               *  . . . . . . . . . . . . . . . L 
+  99               /  . . . . . . . . . . . . . . . L 
+ 100            real  . . G G . G G G G G G G G G G . 
+
+                                  9                   
+                      5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 
+
+
+
+NUMBER OF ENTRIES OF EACH TYPE IN SIMPLE PRECEDENCE MATRIX
+........EQ   ........LT   ........GT
+        94          543          714
+
+.....LT,EQ   .....GT,EQ   .....LT,GT   ..LT,EQ,GT
+         0            0            0            0
+
+
+
+Analysis Time =   0.0020 Seconds
+
+
+
+
+
+
+
+
+
+
+Precedence Functions According To Floyd's Method:
+
+         Symbol     F       G
+          start     1       1
+           prog     1       1
+           body     1       1
+       declpart     2       2
+       decllist     1       1
+      decllist-     2       2
+       declstat     1       2
+      declstat-    13       3
+           type    12      12
+       procpart     2       2
+       proclist     4       3
+           proc     6       4
+       prochead     2       5
+       procname     1       5
+      null-list    15       1
+      fparmlist    12       1
+     fparmlist-    13       2
+       calltype    12      12
+       execpart     2       2
+       exechead     2       3
+       statlist     1       2
+      statlist-     3       3
+           stat    15       3
+     inputstat-     1       4
+      inputstat    13       4
+     outputstat-     1       4
+     outputstat    13       4
+       callstat     1       4
+       callname     1       4
+      aparmlist    12       1
+     aparmlist-    13       2
+         ifstat     1       4
+         ifthen     2       4
+         ifhead     2       4
+      whilestat     1       4
+      whilecond     2       4
+      whilehead    12       4
+     assignstat    15       4
+          astat     1       4
+          bexpr     2       5
+         bexpr-     3       6
+        andexpr     4       6
+       andexpr-     4       7
+        notexpr     5       7
+       notexpr-     5       8
+        relexpr     5       8
+       relexpr-     5       9
+          aexpr     5       9
+         aexpr-    10      10
+           term    11      10
+          term-    11      11
+        primary    12      11
+       primary-    12      12
+       constant    14      12
+            END    15       1
+        PROGRAM    12       1
+            var    14      12
+        DECLARE     1       3
+              ;    15       1
+              ,    12      13
+              =    12      14
+        integer    14      14
+             ::    14      14
+        INTEGER    13      13
+           REAL    13      13
+              }    15      12
+      PROCEDURE    12       5
+              {    12       2
+          VALUE    14      13
+      REFERENCE    14      13
+           MAIN    15       3
+              [     4      14
+              ]    14       1
+              :     4       1
+          INPUT     1       4
+         string    13       1
+         OUTPUT     1       4
+           CALL    12       4
+           ELSE    15       1
+             IF    12       4
+              (     5      12
+              )    12       2
+           THEN    15      12
+             DO    15      12
+          WHILE    13       4
+             <-     9      14
+             ||     6       3
+             &&     7       4
+              !     8       8
+              <     9       5
+             <=     9       5
+              >     9       5
+             >=     9       5
+             ==     9       5
+             !=     9       5
+              +    10      10
+              -    10      10
+              *    11      11
+              /    11      11
+           real    14      13
+Analysis time: 1 60ths of a second

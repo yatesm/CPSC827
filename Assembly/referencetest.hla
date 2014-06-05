@@ -1,0 +1,271 @@
+
+//(referencetest, PROGRAMBEGIN, , )
+
+EAX: 
+EBX: 
+ECX: 
+EDX: 
+ESI: 
+EDI: 
+Stack (Top): 
+program referencetest;
+#include ( "stdlib.hhf" )
+
+//(x, MEMORY, 1, -)
+
+EAX: 
+EBX: 
+ECX: 
+EDX: 
+ESI: 
+EDI: 
+Stack (Top): 
+static
+x: dword;
+
+//(reftest, PROCEDUREBEGIN, -, -)
+
+EAX: 
+EBX: 
+ECX: 
+EDX: 
+ESI: 
+EDI: 
+Stack (Top): 
+
+//(-, BEGINFORMALPARAMETERS, -, -)
+
+EAX: 
+EBX: 
+ECX: 
+EDX: 
+ESI: 
+EDI: 
+Stack (Top): 
+
+//(x, FORMALREFERENCEPARAMETER, 1, -)
+
+EAX: 
+EBX: 
+ECX: 
+EDX: 
+ESI: 
+EDI: 
+Stack (Top): 
+
+//(-, ENDFORMALPARAMETERS, -, -)
+
+EAX: 
+EBX: 
+ECX: 
+EDX: 
+ESI: 
+EDI: 
+Stack (Top): 
+procedure reftest( var x: int32) ;
+
+//(I$0, ISUB, x, 1)
+
+EAX: 
+EBX: 
+ECX: 
+EDX: 
+ESI: 
+EDI: 
+Stack (Top): 
+begin reftest;
+mov( x, EAX );
+sub( 1, (type int32 [EAX]) );
+mov( (type int32 [EAX]), EBX );
+
+//(x, SUBSTORE, I$0, -)
+
+EAX: I$0
+EBX: 
+ECX: 
+EDX: 
+ESI: 
+EDI: 
+Stack (Top): 
+mov( EAX, x );
+
+//(reftest, ENDPROCEDURE, -, -)
+
+EAX: I$0
+EBX: 
+ECX: 
+EDX: 
+ESI: 
+EDI: 
+Stack (Top): 
+end reftest;
+
+//(MAIN, LABEL, -, -)
+
+EAX: I$0
+EBX: 
+ECX: 
+EDX: 
+ESI: 
+EDI: 
+Stack (Top): 
+begin referencetest;
+MAIN:
+
+//(x, SUBSTORE, 5, -)
+
+EAX: 
+EBX: 
+ECX: 
+EDX: 
+ESI: 
+EDI: 
+Stack (Top): 
+mov( 5, x );
+
+//(-, CALL, PRINTF, -)
+
+EAX: 
+EBX: 
+ECX: 
+EDX: 
+ESI: 
+EDI: 
+Stack (Top): 
+
+//(-, BEGINOUTPUTPARAMETER,  "%d", -)
+
+EAX: 
+EBX: 
+ECX: 
+EDX: 
+ESI: 
+EDI: 
+Stack (Top): 
+stdout.put(" ");
+
+//(-, OUTPUTPARAMETER, x, 1)
+
+EAX: 
+EBX: 
+ECX: 
+EDX: 
+ESI: 
+EDI: 
+Stack (Top): 
+stdout.puti32Size(x, 1, ' ');
+
+//(-, ENDOUTPUTPARAMETER, -, -)
+
+EAX: 
+EBX: 
+ECX: 
+EDX: 
+ESI: 
+EDI: 
+Stack (Top): 
+
+//(reftest, PROCCALL, -, -)
+
+EAX: 
+EBX: 
+ECX: 
+EDX: 
+ESI: 
+EDI: 
+Stack (Top): 
+
+//(-, BEGINACTUALPARAMETERLIST, -, -)
+
+EAX: 
+EBX: 
+ECX: 
+EDX: 
+ESI: 
+EDI: 
+Stack (Top): 
+
+//(-, ACTUALREFERENCEPARAMETER, x, 1)
+
+EAX: 
+EBX: 
+ECX: 
+EDX: 
+ESI: 
+EDI: 
+Stack (Top): 
+
+//(-, ENDACTUALPARAMETERS, -, -)
+
+EAX: 
+EBX: 
+ECX: 
+EDX: 
+ESI: 
+EDI: 
+Stack (Top): 
+reftest(x) ;
+
+//(-, CALL, PRINTF, -)
+
+EAX: 
+EBX: 
+ECX: 
+EDX: 
+ESI: 
+EDI: 
+Stack (Top): 
+
+//(-, BEGINOUTPUTPARAMETER,  "%d", -)
+
+EAX: 
+EBX: 
+ECX: 
+EDX: 
+ESI: 
+EDI: 
+Stack (Top): 
+stdout.put(" ");
+
+//(-, OUTPUTPARAMETER, x, 1)
+
+EAX: 
+EBX: 
+ECX: 
+EDX: 
+ESI: 
+EDI: 
+Stack (Top): 
+stdout.puti32Size(x, 1, ' ');
+
+//(-, ENDOUTPUTPARAMETER, -, -)
+
+EAX: 
+EBX: 
+ECX: 
+EDX: 
+ESI: 
+EDI: 
+Stack (Top): 
+
+//(-, ENDOFCALCULATIONS, -, -)
+
+EAX: 
+EBX: 
+ECX: 
+EDX: 
+ESI: 
+EDI: 
+Stack (Top): 
+
+//(referencetest, PROGRAMEND, -, -)
+
+EAX: 
+EBX: 
+ECX: 
+EDX: 
+ESI: 
+EDI: 
+Stack (Top): 
+stdout.put(nl);
+end referencetest;

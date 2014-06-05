@@ -1,0 +1,26 @@
+##+1 print the source lines, etc ## 
+/*  This program should contain errors */
+PROGRAM semantic_error
+  DECLARE
+      INTEGER x;
+      INTEGER y;     
+      REAL a 75;
+      INTEGER c 100::25;
+      REAL f 50::60;
+      REAL hcg 50::60;
+      INTEGER lkj 100;
+      REAL help;
+  END
+
+  MAIN
+    INPUT a[25], x, b;
+    WHILE ( i < -1 ) DO
+      IF (x) THEN
+        hcg[x:y] <- hcg[help:y] * x / y;
+        x <- lkj[x:y] + x / y;
+        f[x:y] <- f[x:y] * x / y;
+      END;
+    END;
+  END
+END
+

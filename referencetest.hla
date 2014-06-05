@@ -1,0 +1,71 @@
+
+//(referencetest, PROGRAMBEGIN, , )
+program referencetest;
+#include ( "stdlib.hhf" )
+
+//(x, MEMORY, 1, -)
+static
+x: dword;
+
+//(reftest, PROCEDUREBEGIN, -, -)
+
+//(-, BEGINFORMALPARAMETERS, -, -)
+
+//(x, FORMALREFERENCEPARAMETER, 1, -)
+
+//(-, ENDFORMALPARAMETERS, -, -)
+procedure reftest( var x: int32) ;
+
+//(I$0, ISUB, x, 1)
+begin reftest;
+mov( x, EAX );
+sub( 1, (type int32 [EAX]) );
+mov( (type int32 [EAX]), EBX );
+
+//(x, SUBSTORE, I$0, -)
+mov( EAX, x );
+
+//(reftest, ENDPROCEDURE, -, -)
+end reftest;
+
+//(MAIN, LABEL, -, -)
+begin referencetest;
+MAIN:
+
+//(x, SUBSTORE, 5, -)
+mov( 5, x );
+
+//(-, CALL, PRINTF, -)
+
+//(-, BEGINOUTPUTPARAMETER,  "%d", -)
+stdout.put(" ");
+
+//(-, OUTPUTPARAMETER, x, 1)
+stdout.puti32Size(x, 1, ' ');
+
+//(-, ENDOUTPUTPARAMETER, -, -)
+
+//(reftest, PROCCALL, -, -)
+
+//(-, BEGINACTUALPARAMETERLIST, -, -)
+
+//(-, ACTUALREFERENCEPARAMETER, x, 1)
+
+//(-, ENDACTUALPARAMETERS, -, -)
+reftest(x) ;
+
+//(-, CALL, PRINTF, -)
+
+//(-, BEGINOUTPUTPARAMETER,  "%d", -)
+stdout.put(" ");
+
+//(-, OUTPUTPARAMETER, x, 1)
+stdout.puti32Size(x, 1, ' ');
+
+//(-, ENDOUTPUTPARAMETER, -, -)
+
+//(-, ENDOFCALCULATIONS, -, -)
+
+//(referencetest, PROGRAMEND, -, -)
+stdout.put(nl);
+end referencetest;

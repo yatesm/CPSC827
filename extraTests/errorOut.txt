@@ -1,0 +1,263 @@
+Name: Yates Monteith and Anthony McDougal
+Email JYMONTE@Clemson.edu, MCOUDGL@Clemson.edu
+Timestamp Thu Feb 17 16:43:25 2011
+
+Input Line: /*  This program should contain 2 errors */        
+Input Line: PROGRAM error      
+Input Line:   DECLARE     
+	Reduction 2.	prog --> PROGRAM var
+Input Line:       INTEGER x;     
+	Reduction 16.	type --> INTEGER
+	Reduction 12.	declstat- --> type var
+	Reduction 9.	declstat --> declstat-
+Input Line:       REAL a 75 ;     
+	Reduction 8.	decllist- --> declstat ;
+	Reduction 17.	type --> REAL
+	Reduction 14.	declstat- --> type var integer
+	Reduction 9.	declstat --> declstat-
+Input Line:       INTEGER c 100 :: 25 ;     
+	Reduction 7.	decllist- --> decllist- declstat ;
+	Reduction 16.	type --> INTEGER
+	Reduction 15.	declstat- --> type var integer :: integer
+	Reduction 9.	declstat --> declstat-
+Input Line:       REAL f 60 :: a ;
+	Reduction 7.	decllist- --> decllist- declstat ;
+	Reduction 17.	type --> REAL
+
+Reduceability Error!
+START TO PANIC!!!
+Stack: ### prog DECLARE decllist-  type var integer ::
+Symbols thrown out: type var integer ::
+
+Source Line Thrown Out:       REAL f 60 :: a ;
+Input Line:       INTEGER lkj 100 ;     
+	Reduction 16.	type --> INTEGER
+	Reduction 14.	declstat- --> type var integer
+	Reduction 9.	declstat --> declstat-
+Input Line:       REAL help;     
+	Reduction 7.	decllist- --> decllist- declstat ;
+	Reduction 17.	type --> REAL
+	Reduction 12.	declstat- --> type var
+	Reduction 9.	declstat --> declstat-
+Input Line:   END     
+	Reduction 7.	decllist- --> decllist- declstat ;
+	Reduction 6.	decllist --> decllist-
+Input Line:      
+Input Line:   MAIN     
+	Reduction 5.	declpart --> DECLARE decllist END
+Input Line:     INPUT "3%d", lkj[25], a, b;     
+	Reduction 37.	exechead --> MAIN
+	Reduction 115.	constant --> integer
+	Reduction 114.	primary- --> constant
+	Reduction 109.	primary --> primary-
+	Reduction 108.	term- --> primary
+	Reduction 105.	term --> term-
+	Reduction 104.	aexpr- --> term
+	Reduction 100.	aexpr --> aexpr-
+	Reduction 99.	relexpr- --> aexpr
+	Reduction 92.	relexpr --> relexpr-
+	Reduction 90.	notexpr- --> relexpr
+	Reduction 89.	notexpr --> notexpr-
+	Reduction 88.	andexpr- --> notexpr
+	Reduction 86.	andexpr --> andexpr-
+	Reduction 85.	bexpr- --> andexpr
+	Reduction 83.	bexpr --> bexpr-
+	Reduction 82.	astat --> bexpr
+	Reduction 52.	inputstat --> INPUT string , var [ astat ]
+	Reduction 48.	inputstat --> inputstat , var
+	Reduction 48.	inputstat --> inputstat , var
+	Reduction 47.	inputstat- --> inputstat
+Input Line:     WHILE (i <= 20) DO
+	Reduction 44.	stat --> inputstat- ;
+	Reduction 40.	statlist- --> stat
+	Reduction 77.	whilehead --> WHILE
+	Reduction 113.	primary- --> var
+	Reduction 109.	primary --> primary-
+	Reduction 108.	term- --> primary
+	Reduction 105.	term --> term-
+	Reduction 104.	aexpr- --> term
+	Reduction 100.	aexpr --> aexpr-
+	Reduction 115.	constant --> integer
+	Reduction 114.	primary- --> constant
+	Reduction 109.	primary --> primary-
+	Reduction 108.	term- --> primary
+	Reduction 105.	term --> term-
+	Reduction 104.	aexpr- --> term
+	Reduction 100.	aexpr --> aexpr-
+	Reduction 94.	relexpr- --> aexpr <= aexpr
+	Reduction 92.	relexpr --> relexpr-
+	Reduction 90.	notexpr- --> relexpr
+	Reduction 89.	notexpr --> notexpr-
+	Reduction 88.	andexpr- --> notexpr
+	Reduction 86.	andexpr --> andexpr-
+	Reduction 85.	bexpr- --> andexpr
+	Reduction 83.	bexpr --> bexpr-
+Input Line:       IF (b==c) THEN     
+	Reduction 76.	whilecond --> whilehead ( bexpr ) DO
+	Reduction 113.	primary- --> var
+	Reduction 109.	primary --> primary-
+	Reduction 108.	term- --> primary
+	Reduction 105.	term --> term-
+	Reduction 104.	aexpr- --> term
+	Reduction 100.	aexpr --> aexpr-
+	Reduction 113.	primary- --> var
+	Reduction 109.	primary --> primary-
+	Reduction 108.	term- --> primary
+	Reduction 105.	term --> term-
+	Reduction 104.	aexpr- --> term
+	Reduction 100.	aexpr --> aexpr-
+	Reduction 97.	relexpr- --> aexpr == aexpr
+	Reduction 92.	relexpr --> relexpr-
+	Reduction 90.	notexpr- --> relexpr
+	Reduction 89.	notexpr --> notexpr-
+	Reduction 88.	andexpr- --> notexpr
+	Reduction 86.	andexpr --> andexpr-
+	Reduction 85.	bexpr- --> andexpr
+	Reduction 83.	bexpr --> bexpr-
+Input Line:         lkj[a:b] <- lkj[a:b]*a/b;     
+	Reduction 74.	ifhead --> IF ( bexpr ) THEN
+	Reduction 113.	primary- --> var
+	Reduction 109.	primary --> primary-
+	Reduction 108.	term- --> primary
+	Reduction 105.	term --> term-
+	Reduction 104.	aexpr- --> term
+	Reduction 100.	aexpr --> aexpr-
+	Reduction 99.	relexpr- --> aexpr
+	Reduction 92.	relexpr --> relexpr-
+	Reduction 90.	notexpr- --> relexpr
+	Reduction 89.	notexpr --> notexpr-
+	Reduction 88.	andexpr- --> notexpr
+	Reduction 86.	andexpr --> andexpr-
+	Reduction 85.	bexpr- --> andexpr
+	Reduction 83.	bexpr --> bexpr-
+	Reduction 82.	astat --> bexpr
+	Reduction 113.	primary- --> var
+	Reduction 109.	primary --> primary-
+	Reduction 108.	term- --> primary
+	Reduction 105.	term --> term-
+	Reduction 104.	aexpr- --> term
+	Reduction 100.	aexpr --> aexpr-
+	Reduction 99.	relexpr- --> aexpr
+	Reduction 92.	relexpr --> relexpr-
+	Reduction 90.	notexpr- --> relexpr
+	Reduction 89.	notexpr --> notexpr-
+	Reduction 88.	andexpr- --> notexpr
+	Reduction 86.	andexpr --> andexpr-
+	Reduction 85.	bexpr- --> andexpr
+	Reduction 83.	bexpr --> bexpr-
+	Reduction 82.	astat --> bexpr
+	Reduction 113.	primary- --> var
+	Reduction 109.	primary --> primary-
+	Reduction 108.	term- --> primary
+	Reduction 105.	term --> term-
+	Reduction 104.	aexpr- --> term
+	Reduction 100.	aexpr --> aexpr-
+	Reduction 99.	relexpr- --> aexpr
+	Reduction 92.	relexpr --> relexpr-
+	Reduction 90.	notexpr- --> relexpr
+	Reduction 89.	notexpr --> notexpr-
+	Reduction 88.	andexpr- --> notexpr
+	Reduction 86.	andexpr --> andexpr-
+	Reduction 85.	bexpr- --> andexpr
+	Reduction 83.	bexpr --> bexpr-
+	Reduction 82.	astat --> bexpr
+	Reduction 113.	primary- --> var
+	Reduction 109.	primary --> primary-
+	Reduction 108.	term- --> primary
+	Reduction 105.	term --> term-
+	Reduction 104.	aexpr- --> term
+	Reduction 100.	aexpr --> aexpr-
+	Reduction 99.	relexpr- --> aexpr
+	Reduction 92.	relexpr --> relexpr-
+	Reduction 90.	notexpr- --> relexpr
+	Reduction 89.	notexpr --> notexpr-
+	Reduction 88.	andexpr- --> notexpr
+	Reduction 86.	andexpr --> andexpr-
+	Reduction 85.	bexpr- --> andexpr
+	Reduction 83.	bexpr --> bexpr-
+	Reduction 82.	astat --> bexpr
+	Reduction 111.	primary- --> var [ astat : astat ]
+	Reduction 109.	primary --> primary-
+	Reduction 108.	term- --> primary
+	Reduction 113.	primary- --> var
+	Reduction 109.	primary --> primary-
+	Reduction 106.	term- --> term- * primary
+	Reduction 113.	primary- --> var
+	Reduction 109.	primary --> primary-
+	Reduction 107.	term- --> term- / primary
+	Reduction 105.	term --> term-
+	Reduction 104.	aexpr- --> term
+	Reduction 100.	aexpr --> aexpr-
+	Reduction 81.	astat --> var [ astat : astat ] <- aexpr
+Input Line:         a <- lkj[a:b]a/b;     
+	Reduction 78.	assignstat --> astat ;
+	Reduction 43.	stat --> assignstat
+	Reduction 40.	statlist- --> stat
+	Reduction 113.	primary- --> var
+	Reduction 109.	primary --> primary-
+	Reduction 108.	term- --> primary
+	Reduction 105.	term --> term-
+	Reduction 104.	aexpr- --> term
+	Reduction 100.	aexpr --> aexpr-
+	Reduction 99.	relexpr- --> aexpr
+	Reduction 92.	relexpr --> relexpr-
+	Reduction 90.	notexpr- --> relexpr
+	Reduction 89.	notexpr --> notexpr-
+	Reduction 88.	andexpr- --> notexpr
+	Reduction 86.	andexpr --> andexpr-
+	Reduction 85.	bexpr- --> andexpr
+	Reduction 83.	bexpr --> bexpr-
+	Reduction 82.	astat --> bexpr
+	Reduction 113.	primary- --> var
+	Reduction 109.	primary --> primary-
+	Reduction 108.	term- --> primary
+	Reduction 105.	term --> term-
+	Reduction 104.	aexpr- --> term
+	Reduction 100.	aexpr --> aexpr-
+	Reduction 99.	relexpr- --> aexpr
+	Reduction 92.	relexpr --> relexpr-
+	Reduction 90.	notexpr- --> relexpr
+	Reduction 89.	notexpr --> notexpr-
+	Reduction 88.	andexpr- --> notexpr
+	Reduction 86.	andexpr --> andexpr-
+	Reduction 85.	bexpr- --> andexpr
+	Reduction 83.	bexpr --> bexpr-
+	Reduction 82.	astat --> bexpr
+	Reduction 111.	primary- --> var [ astat : astat ]
+
+Reduceability Error!
+START TO PANIC!!!
+Stack: ### prog declpart exechead statlist- whilecond ifhead statlist- var <-  primary- var
+Symbols thrown out: primary- var
+<- var 
+Source Line Thrown Out:         a <- lkj[a:b]a/b;     
+Input Line:         CALL hithere{VALUE a, REFERENCE b};     
+	Reduction 63.	callname --> CALL var
+	Reduction 34.	calltype --> VALUE
+	Reduction 68.	aparmlist- --> { calltype var
+	Reduction 35.	calltype --> REFERENCE
+	Reduction 65.	aparmlist- --> aparmlist- , calltype var
+	Reduction 64.	aparmlist --> aparmlist-
+	Reduction 62.	callstat --> callname aparmlist }
+Input Line:       END;     
+	Reduction 46.	stat --> callstat ;
+	Reduction 39.	statlist- --> statlist- stat
+	Reduction 38.	statlist --> statlist-
+	Reduction 71.	ifstat --> ifhead statlist END
+Input Line:     END;      
+	Reduction 42.	stat --> ifstat ;
+	Reduction 40.	statlist- --> stat
+	Reduction 38.	statlist --> statlist-
+	Reduction 75.	whilestat --> whilecond statlist END
+Input Line:   END     
+	Reduction 41.	stat --> whilestat ;
+	Reduction 39.	statlist- --> statlist- stat
+	Reduction 38.	statlist --> statlist-
+Input Line: END     
+	Reduction 36.	execpart --> exechead statlist END
+	Reduction 4.	body --> declpart execpart
+Input Line: 
+Input Line: 
+	Reduction 1.	start --> prog body END
+Succesful parse
+Go have a beer!

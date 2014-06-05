@@ -1,0 +1,29 @@
+Name: Yates Monteith and Anthony McDougal
+Email JYMONTE@Clemson.edu, MCOUDGL@Clemson.edu
+Timestamp Mon Apr 18 16:26:52 2011
+
+				(test, PROGRAMBEGIN, , )
+				(x, MEMORY, 1, -)
+				(reftest, PROCEDUREBEGIN, -, -)
+				(-, BEGINFORMALPARAMETERS, -, -)
+				(x, FORMALREFERENCEPARAMETER, 1, -)
+				(-, ENDFORMALPARAMATERS, -, -)
+				(I$0, IADD, x, 1)
+				(x, SUBSTORE, I$0, -)
+				(reftest, ENDPROCEDURE, -, -)
+				(MAIN, LABEL, -, -)
+				(x, SUBSTORE, 5, -)
+				(-, CALL, PRINTF, -)
+				(-, BEGINOUTPUTPARAMETER, "xbeforeprocedure:%d\n", -)
+				(-, OUTPUTPARAMETER, x, 1)
+				(reftest, PROCCALL, -, -)
+				(-, BEGINACTUALPARAMETERLIST, -, -)
+				(-, ACTUALREFERENCEPARAMETER, x, 1)
+				(-, ENDACTUALPARAMETERS, -, -)
+				(-, CALL, PRINTF, -)
+				(-, BEGINOUTPUTPARAMETER, "xafterprocedure:%d\n", -)
+				(-, OUTPUTPARAMETER, x, 1)
+				(-, ENDOFCALCULATIONS, -, -)
+				(test, PROGRAMEND, -, -)
+Succesful parse
+Go have a beer!

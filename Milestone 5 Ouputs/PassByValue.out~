@@ -1,0 +1,37 @@
+Name: Yates Monteith and Anthony McDougal
+Email JYMONTE@Clemson.edu, MCOUDGL@Clemson.edu
+Timestamp Fri Apr 29 07:59:13 2011
+
+				(valtest, PROGRAMBEGIN, , )
+				(x, MEMORY, 1, -)
+				(valproc, PROCEDUREBEGIN, -, -)
+				(-, BEGINFORMALPARAMETERS, -, -)
+				(x, FORMALVALUEPARAMETER, 1, -)
+				(-, ENDFORMALPARAMETERS, -, -)
+				(I$0, IADD, x, 1)
+				(x, SUBSTORE, I$0, -)
+				(-, CALL, PRINTF, -)
+				(-, BEGINOUTPUTPARAMETER,  " %d ", -)
+				(-, OUTPUTPARAMETER, x, 1)
+				(-, ENDOUTPUTPARAMETER, -, -)
+				(valproc, ENDPROCEDURE, -, -)
+				(MAIN, LABEL, -, -)
+				(x, SUBSTORE, 5, -)
+				(-, CALL, PRINTF, -)
+				(-, BEGINOUTPUTPARAMETER,  " %d ", -)
+				(-, OUTPUTPARAMETER, x, 1)
+				(-, ENDOUTPUTPARAMETER, -, -)
+				(valproc, PROCCALL, -, -)
+				(-, BEGINACTUALPARAMETERLIST, -, -)
+				(-, ACTUALVALUEPARAMETER, x, 1)
+				(-, ENDACTUALPARAMETERS, -, -)
+				(-, CALL, PRINTF, -)
+				(-, BEGINOUTPUTPARAMETER,  " %d ", -)
+				(-, OUTPUTPARAMETER, x, 1)
+				(-, ENDOUTPUTPARAMETER, -, -)
+				(-, ENDOFCALCULATIONS, -, -)
+				(valtest, PROGRAMEND, -, -)
+Succesful parse
+Go have a beer!
+ProcString = procedure valproc( val x: int32) 
+callString = valproc(x) 

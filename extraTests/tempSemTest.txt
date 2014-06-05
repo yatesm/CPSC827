@@ -1,0 +1,53 @@
+##+1+12+8+13+14+16   print the symbolic 4 tuples  ##
+/*  This program should not contains any errors */
+PROGRAM test
+  DECLARE
+      INTEGER x;
+      INTEGER i, k, l;
+      INTEGER j;
+      ##+12 print the Semantic Stack Symbolically before and after   ##
+      REAL a 75 ,b ;
+      INTEGER c 100 :: 25 ;
+      INTEGER d 100 :: 25 , g, h ;
+      ##+15 print the variable symbol table after update  ##
+      REAL f 50 :: 60 ;
+      ##-15 ##
+      REAL help;
+  END
+
+  PROCEDURE hithere{VALUE INTEGER d, REFERENCE REAL tre 125 ,
+                    VALUE INTEGER k 235 :: 543 }
+    DECLARE
+        INTEGER a;
+        INTEGER hcg 75 ;
+        INTEGER def 75 ;
+    END
+
+    IF (a <= 10) THEN
+      b <- c + ( d * e ) / f ;
+    ELSE
+      c <- - b - d * ( e / f ) ;
+    END;
+    OUTPUT "%d5 - %d5  %d\n", a, b, f[a:b<-b+1];
+  END   /* hithere */
+  PROCEDURE byethere{VALUE REAL a, REFERENCE REAL k 125 ,
+                     VALUE REAL tre 235 :: 543 }
+    a <- k[100] + ( lkj[d] * tre[1:2] ) ;
+    d <- - d - tre[b:d] * ( x / k[d] ) ;
+    INPUT "5d,%d,%d\n", a, d, tre[b:b<-b+1];
+  END   /* bythere */
+
+  MAIN
+    OUTPUT "%d5 - %d5 %d\n", lkj[25], a, b;  
+    WHILE (j > 20) DO
+      WHILE ( 3*i < j+1) DO
+        IF (b==c) THEN
+          lkj[a:b] <- lkj[a:b]*a/b;
+          CALL hithere{VALUE a, REFERENCE b};
+          tre[f[a:j<-j+1]] <- lkj[a:b];
+        END;
+      END;
+    END;
+  END
+
+END
