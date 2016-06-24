@@ -73,9 +73,6 @@ void CompilerData::handleProductionData(const string& filename) {
 	char buff[BUFSIZE];
    std::fstream in;
    in.open(filename.c_str(), std::ios::in);
-   if (!in) { // couldn't open the game file
-      throw std::string("Cannot open file: ")+filename;
-   }
 	int i = 1;
 	string lhs, rhs;
    while ( true ) {
@@ -96,9 +93,6 @@ void CompilerData::handlePrecedenceData(const string& filename) {
 	char buff[BUFSIZE];
    std::fstream in;
    in.open(filename.c_str(), std::ios::in);
-   if (!in) { // couldn't open the game file
-      throw std::string("Cannot open file: ")+filename;
-   }
 	string lhs, rhs;
    while ( true ) {
 		in.getline( buff, BUFSIZE);

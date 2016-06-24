@@ -9,15 +9,20 @@
 using std::map;
 
 class Compiler {
-	public:
-		Compiler(string fname);
-		void compile();
-	private:
-		CompilerData *cData;
-		Parser parser;
-		AssemblyGenerator assembler;
-		//Private functions not for use.
-		Compiler(const Compiler& c);
-		Compiler& operator=(const Compiler& c);
+public:
+    Compiler(string fname);
+
+    void compile();
+
+private:
+    CompilerData *cData;
+    Parser parser;
+    AssemblyGenerator assembler;
+
+    //Private functions not for use.
+    Compiler(const Compiler &c);
+
+    Compiler &operator=(const Compiler &c);
 };
+
 #endif

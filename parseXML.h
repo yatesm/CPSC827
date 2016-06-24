@@ -1,5 +1,6 @@
 #ifndef PARSEXML__H
 #define PARSEXML__H
+
 #include <cstdio>
 #include <iostream>
 #include <fstream>
@@ -9,42 +10,54 @@
 #include "handleChars.h"
 
 using std::cerr; using std::cout; using std::endl;
-using std::string; 
+using std::string;
 const int BUFSIZE = 8192;
 
 class ParseXML {
 public:
-  static ParseXML* getInstance();
-  //parseXML choreographs the parse of filename & possibly calls handle()
-  void parseXML(const string& filename, HandleChars* hand = NULL);
-  const string& getLastTag() const { return lastTag; }
+    static ParseXML *getInstance();
 
-  static void wrapper4Start(void *data, const char *el, const char **attr);
-  static void wrapper4End(void *data, const char *el);
-  static void wrapper4Chars(void *data, const char *text, int textlen);
-  ~ParseXML() { XML_ParserFree(parser); }
+    //parseXML choreographs the parse of filename & possibly calls handle()
+    void parseXML(const string &filename, HandleChars *hand = NULL);
+
+    const string &getLastTag() const { return lastTag; }
+
+    static void wrapper4Start(void *data, const char *el, const char **attr);
+
+    static void wrapper4End(void *data, const char *el);
+
+    static void wrapper4Chars(void *data, const char *text, int textlen);
+
+    ~ParseXML() { XML_ParserFree(parser); }
+
 private:
-  XML_Parser parser;
-  HandleChars* handle;
+    XML_Parser parser;
+    HandleChars *handle;
 
-  char buff[BUFSIZE];
-  static ParseXML* instance;
-  string  nextToLastTag;
-  string  lastTag;
+    char buff[BUFSIZE];
+    static ParseXML *instance;
+    string nextToLastTag;
+    string lastTag;
 
-  ParseXML() : 
-    parser(NULL), 
-    handle(NULL),
-    nextToLastTag(), lastTag()
-  {}
+    ParseXML() :
+            parser(NULL),
+            handle(NULL),
+            nextToLastTag(), lastTag() { }
 
-  void start(void *, const char *, const char **);
+    void start(void *, const char *, const char **);
+
 //  void end(void *data, const char *el) {}
-  void end(void *, const char *) {}
-  void chars(void *, const char *, int textlen);
-  void stripWhiteSpace(string&) const;
-  void stripTrailWhiteSpace(string&) const;
-  ParseXML& operator=(const ParseXML&);
-  ParseXML(const ParseXML&);
+    void end(void *, const char *) { }
+
+    void chars(void *, const char *, int textlen);
+
+    void stripWhiteSpace(string &) const;
+
+    void stripTrailWhiteSpace(string &) const;
+
+    ParseXML &operator=(const ParseXML &);
+
+    ParseXML(const ParseXML &);
 };
+
 #endif

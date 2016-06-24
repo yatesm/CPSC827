@@ -14,22 +14,30 @@ using std::string;
 using std::stack;
 
 class Parser {
-	public:
-		Parser(string fname);
-		void beginParse();
-		void printSyntaxStack();
-      void printSemanticStack();
-		void panic(string handle);
-	private:
-		multimap<string, Production> productionMap;
-		multimap<string, int> fSymbolMap;
-		multimap<string, int> gSymbolMap;
-		stack<Token*> syntaxStack;
-		stack<string> semanticsStack;
-		LexicalAnalyzer lex;
-		SemanticsAnalyzer semantics;
-		CompilerData* cData;
-		Parser(const Parser& p);
-		Parser& operator=(const Parser& p);
+public:
+    Parser(string fname);
+
+    void beginParse();
+
+    void printSyntaxStack();
+
+    void printSemanticStack();
+
+    void panic(string handle);
+
+private:
+    multimap <string, Production> productionMap;
+    multimap<string, int> fSymbolMap;
+    multimap<string, int> gSymbolMap;
+    stack<Token *> syntaxStack;
+    stack <string> semanticsStack;
+    LexicalAnalyzer lex;
+    SemanticsAnalyzer semantics;
+    CompilerData *cData;
+
+    Parser(const Parser &p);
+
+    Parser &operator=(const Parser &p);
 };
+
 #endif
