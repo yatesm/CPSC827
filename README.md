@@ -24,7 +24,7 @@ The compiler was developed on a CentOS distribution of Linux, and compiled to us
   + **Imperative** - The programs produced by the language are stateful and a combination of subroutines, procedures and steps to complete execution of a program.
 5. **x86 High Level Assembly (HLA)** - HLA is an assembly language abstraction on the x86 instruction set.  The abstraction mainly concerns the different dialects of x86 and provides a unified and consistent syntax.  HLA also provides high level control structures (for, while, do-while, if, else, switch), but those were not used in this program.
 
-The compiler is written in C++ and uses a OO programming and design pattersn to accomplish compilation.  In order to fulfill the requirements for the class, we implemented 7 of 8 possible extra language features:
+In order to fulfill the requirements for the class, receive an A and exempt the final exam, we implemented 7 of 8 possible extra language features.
   1. Register Spillage.
   2. Global / Local / Static scoping.
   3. One and Two-Dimensional Arrays.
@@ -32,6 +32,7 @@ The compiler is written in C++ and uses a OO programming and design pattersn to 
   5. Pass by Value
   6. Pass by Reference
   7. Recursive Functions
+The only language feature that we did not implement was 32-bit and 64-bit floating point arithmetic.
 
 Additionally, the language supports most high level language features:
   * Scalar, Vector and Matrix data structures
